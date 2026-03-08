@@ -4,5 +4,6 @@ title: "Econometrics (Chow)"
 
 ## Lecture Notes
 
+- [Lecture 0: Introduction](/files/teaching/econometrics-chow/intro.html)
 - [Lecture 1: Causality](/files/teaching/econometrics-chow/lect1_causality.html)
 - [Lecture 2a: The Linear Regression Model](/files/teaching/econometrics-chow/lect2a_lrm_intro.html)
