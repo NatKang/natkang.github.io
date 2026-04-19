@@ -11,3 +11,6 @@ title: "Econometrics (Chow)"
 - [Lecture 2c: Properties of OLS Estimators](/files/teaching/econometrics-chow/lect2c_estimator_properties.html)
 - [Lecture 3a: Inference](/files/teaching/econometrics-chow/lect3a_inference.html)
 - [Lecture 3b: Asymptotics & Heteroskedasticity](/files/teaching/econometrics-chow/lect3b_asymptotics_heteroskedasticity.html)
+- [Lecture 4a: Functional Form & Scaling](/files/teaching/econometrics-chow/lect4a_functional_form_scaling.html)
+- [Lecture 4b: Dummy Variables](/files/teaching/econometrics-chow/lect4b_dummy_variables.html)
+- [Lecture 4c: Model Selection & Controls](/files/teaching/econometrics-chow/lect4c_model_selection_controls.html)
