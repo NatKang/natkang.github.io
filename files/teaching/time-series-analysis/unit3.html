@@ -502,37 +502,37 @@ margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
 background-color: var(--background-color);
 color: var(--text-color);
 font-family: -apple-system, "Inter", Helvetica, Arial, sans-serif;
-font-size: 26px;
+font-size: 30px;
 letter-spacing: -0.2px;
 }
 
 .reveal h1 {
-font-size: 62px;
+font-size: 66px;
 font-weight: 700;
 color: var(--heading-color);
 margin-bottom: 10px;
 }
 .reveal h2 {
-font-size: 42px;
+font-size: 46px;
 font-weight: 650;
 color: var(--heading-color);
 margin-bottom: 16px;
 }
 .reveal h3 {
-font-size: 30px;
+font-size: 34px;
 font-weight: 600;
 color: var(--heading-color);
 margin-bottom: 12px;
 }
 
 .reveal p {
-font-size: 26px;
+font-size: 30px;
 line-height: 1.35;
 margin: 12px 0;
 }
 
 .reveal ul {
-font-size: 26px;
+font-size: 30px;
 line-height: 1.35;
 margin-left: 1.3em;
 }
@@ -565,10 +565,10 @@ color: #002b5c;
 .reveal section img {
 border-radius: 8px;
 box-shadow: 0 4px 20px rgba(0,0,0,0.18);
-margin: 12px 0;
+margin: 8px 0;
 width: 90%;
 max-width: 90%;
-max-height: 80vh;
+max-height: 60vh;
 height: auto;
 }
 
@@ -583,7 +583,7 @@ margin: auto;
 
 .reveal .slides section .cell-output-display {
 overflow-y: auto !important;
-max-height: 80vh !important; 
+max-height: 65vh !important;
 }
 
 .reveal pre {
@@ -593,7 +593,7 @@ overflow-y: auto !important;
 .reveal .slides section {
 display: flex !important;
 flex-direction: column !important;
-justify-content: center !important;
+justify-content: safe center !important;
 height: 100% !important;
 padding-top: 0;
 }
@@ -1141,7 +1141,7 @@ Natasha Kang
 </section>
 <section id="the-logic-of-estimation-and-inference" class="slide level2 center">
 <h2>The Logic of Estimation and Inference</h2>
-<div id="36779d5d" class="cell" data-fig-height="5" data-fig-width="10" data-execution_count="1">
+<div id="2109506d" class="cell" data-fig-height="5" data-fig-width="10" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1167,11 +1167,9 @@ w_t \sim wn(0,\sigma_w^2),
 </section>
 <section id="estimation-problem-cont." class="slide level2 center">
 <h2>Estimation Problem (cont.)</h2>
-<div class="fragment">
 <p>We observe only a <strong>finite sample</strong> <span class="math display">\[
 (x_1,\ldots,x_n),
 \]</span> and the shocks <span class="math inline">\(\{w_t\}\)</span> are <strong>unobserved</strong>.</p>
-</div>
 <div class="fragment">
 <p><strong>Estimation</strong> consists of constructing <span class="math display">\[
 (\hat\phi_1,\ldots,\hat\phi_p,\;
@@ -1255,14 +1253,11 @@ x_t = \phi x_{t-1} + w_t.
 </section>
 <section id="properties-of-a-good-estimator" class="slide level2 center">
 <h2>Properties of a Good Estimator</h2>
-<div class="fragment">
-<p><strong>Properties of a good estimator?</strong></p>
 <ul>
 <li>unbiasedness (finite-sample)</li>
 <li>consistency</li>
 <li>asymptotic normality</li>
 </ul>
-</div>
 </section>
 <section id="finite-sample-unbiasedness" class="slide level2 center">
 <h2>Finite-Sample Unbiasedness?</h2>
@@ -1298,7 +1293,6 @@ x_t = \phi x_{t-1} + w_t.
 </section>
 <section id="consistency-numerator-and-denominator" class="slide level2 center">
 <h2>Consistency: Numerator and Denominator</h2>
-<div class="fragment">
 <h3 id="denominator-stabilization">Denominator: Stabilization</h3>
 <p>We need <span class="math display">\[
 \frac{1}{n}\sum_{t=2}^n x_{t-1}^2
@@ -1311,7 +1305,6 @@ x_t = \phi x_{t-1} + w_t.
 \;\xrightarrow{p}\; \mathbb{E}(x_{t-1} w_t) =
 0.
 \]</span></p>
-</div>
 </section>
 <section id="do-these-population-moments-exist" class="slide level2 center">
 <h2>Do These Population Moments Exist?</h2>
@@ -1433,7 +1426,6 @@ x_t = \sum_{j=0}^{\infty} \psi_j w_{t-j},
 </section>
 <section id="from-lln-to-clt" class="slide level2 center">
 <h2>From LLN to CLT</h2>
-<div class="fragment">
 <p>A CLT for the partial sum <span class="math display">\[
 \frac{1}{\sqrt{n}}\sum_{t=2}^n x_{t-1} w_t
 \]</span> requires two ingredients:</p>
@@ -1441,6 +1433,7 @@ x_t = \sum_{j=0}^{\infty} \psi_j w_{t-j},
 <li><strong>Variance accumulation at rate <span class="math inline">\(n\)</span></strong>, so that <span class="math inline">\(\sqrt{n}\)</span> is the correct normalization.</li>
 <li><strong>Tail control</strong>, so that no small number of terms dominates the normalized sum.</li>
 </ol>
+<div class="fragment">
 <p>In the AR model, the martingale difference structure of <span class="math inline">\(\{x_{t-1} w_t\}\)</span> ensures weak dependence, which delivers (1). Together with finite second moments, this is sufficient to rule out domination by extreme terms and deliver (2). Under these conditions, <span class="math display">\[
 \frac{1}{\sqrt{n}}\sum_{t=2}^n x_{t-1} w_t
 \;\xrightarrow{d}\;
@@ -1474,39 +1467,27 @@ w_t \sim wn(0,\sigma_w^2),
 </section>
 <section id="implications-for-inference" class="slide level2 center">
 <h2>Implications for Inference</h2>
-<div class="fragment">
-<h3 id="implications">Implications</h3>
 <ul>
 <li>OLS is <strong>consistent</strong></li>
 <li>OLS is <strong>asymptotically normal</strong></li>
 <li>Standard variance formulas apply</li>
 </ul>
-</div>
 </section>
 <section id="estimation-for-ma-and-arma-models" class="slide level2 center">
 <h2>Estimation for MA and ARMA Models</h2>
-<p>So far, we have seen that <strong>OLS works for AR models</strong> because they admit a regression representation with observed regressors.</p>
-<div class="fragment">
-<h3 id="what-changes-for-ma-and-arma-models">What changes for MA and ARMA models?</h3>
-<ul>
-<li>The model involves <strong>unobserved shocks</strong></li>
-<li>There is no regression with observed regressors</li>
-</ul>
+<p>OLS works for AR models because they admit a regression representation with <strong>observed regressors</strong>.</p>
+<p>MA and ARMA models involve <strong>unobserved shocks</strong> — there is no regression with observed regressors.</p>
 <p>For example, an MA(1) model: <span class="math display">\[
 x_t = w_t + \theta w_{t-1},
 \]</span> depends on latent innovations <span class="math inline">\(\{w_t\}\)</span>.</p>
-</div>
 </section>
 <section id="why-ols-fails-for-ma-and-arma-models" class="slide level2 center">
 <h2>Why OLS Fails for MA and ARMA Models</h2>
-<div class="fragment">
-<h3 id="implication-for-estimation">Implication for estimation</h3>
 <ul>
 <li>Ordinary least squares is <strong>not feasible</strong></li>
 <li>Estimation must be based on the <strong>joint distribution</strong> implied by the model</li>
 <li>This leads naturally to <strong>maximum likelihood estimation (MLE)</strong></li>
 </ul>
-</div>
 </section>
 <section id="mle-for-ma-and-arma-models-basic-idea" class="slide level2 center">
 <h2>MLE for MA and ARMA Models: Basic Idea</h2>
@@ -1525,13 +1506,11 @@ f(x_n\mid x_1,\ldots,x_{n-1}).
 </section>
 <section id="gaussian-likelihood-and-mle" class="slide level2 center">
 <h2>Gaussian Likelihood and MLE</h2>
-<div class="fragment">
 <h3 id="a-working-distributional-assumption">A working distributional assumption</h3>
-<p>Assume the innovations are Gaussian and Independent: <span class="math display">\[
+<p>Assume the innovations are Gaussian and independent: <span class="math display">\[
 w_t \stackrel{i.i.d.}{\sim} N(0,\sigma^2).
 \]</span></p>
 <p>This assumption yields a tractable likelihood.</p>
-</div>
 <div class="fragment">
 <h3 id="likelihood-based-estimation">Likelihood-based estimation</h3>
 <p>The parameters <span class="math inline">\((\phi_1,\ldots,\phi_p,\;\theta_1,\ldots,\theta_q,\;\sigma_w^2)\)</span> index the joint density above.</p>
@@ -1569,7 +1548,6 @@ f(x_t \mid x_{t-1},\ldots,x_1,w_0;\theta,\sigma^2)\\
 </section>
 <section id="conditional-vs.-exact-likelihood" class="slide level2 center">
 <h2>Conditional vs. Exact Likelihood</h2>
-<div class="fragment">
 <p>The expression above is the <strong>conditional likelihood</strong>: it treats the initial innovation <span class="math inline">\(w_0\)</span> as fixed.</p>
 <p>The <strong>exact likelihood</strong> integrates over the model-implied distribution of <span class="math inline">\(w_0\)</span>: <span class="math display">\[
 f(x_1,\ldots,x_n;\theta,\sigma^2)
@@ -1578,6 +1556,7 @@ f(x_1,\ldots,x_n;\theta,\sigma^2)
 f(x_1,\ldots,x_n \mid w_0;\theta,\sigma^2)\,
 f(w_0)\,dw_0.
 \]</span></p>
+<div class="fragment">
 <p>Both approaches are valid; under stationarity, they are <strong>asymptotically equivalent</strong>.</p>
 <p><em>In practice, the conditional likelihood is often used for computational simplicity.</em></p>
 </div>
@@ -1614,14 +1593,11 @@ f(x_1,\ldots,x_n \mid x_0, w_0;\phi,\theta,\sigma^2)
 <section id="statistical-inference-with-mle" class="slide level2 center">
 <h2>Statistical Inference with MLE</h2>
 <p>Once the likelihood is specified, inference is based on the <strong>large-sample behavior</strong> of the MLE.</p>
-<div class="fragment">
-<h3 id="large-sample-properties-of-mle">Large-sample properties of MLE</h3>
 <p>In addition to <strong>stationarity and ergodicity</strong> of the process, and under standard <strong>likelihood regularity conditions</strong>:</p>
 <ul>
 <li>the MLE is <strong>consistent</strong></li>
 <li>the MLE is <strong>asymptotically normal</strong></li>
 </ul>
-</div>
 </section>
 <section id="quasimaximum-likelihood-qmle" class="slide level2 center">
 <h2>Quasi–Maximum Likelihood (QMLE)</h2>
