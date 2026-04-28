@@ -14,3 +14,4 @@ title: "Econometrics (Chow)"
 - [Lecture 4a: Functional Form & Scaling](/files/teaching/econometrics-chow/lect4a_functional_form_scaling.html)
 - [Lecture 4b: Dummy Variables](/files/teaching/econometrics-chow/lect4b_dummy_variables.html)
 - [Lecture 4c: Model Selection & Controls](/files/teaching/econometrics-chow/lect4c_model_selection_controls.html)
+- [Lecture 5a: IV — Motivation](/files/teaching/econometrics-chow/lect5a_iv_motivation.html)
