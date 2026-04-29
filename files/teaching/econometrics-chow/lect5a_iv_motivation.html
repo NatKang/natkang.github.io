@@ -1087,7 +1087,7 @@ Natasha Kang
 <li>When conditioning fails: three sources of endogeneity</li>
 <li>Measurement error and attenuation bias</li>
 <li>The IV idea: relevance and exogeneity</li>
-<li>The IV estimator</li>
+<li>Identifying the effect: the Wald ratio</li>
 <li>What does IV estimate? LATE</li>
 </ol>
 </section>
@@ -1171,7 +1171,7 @@ Q^s = \gamma_0 + \gamma_1 P + U^s
 <section id="simultaneity-the-naive-ols" class="slide level2 center">
 <h2>Simultaneity — The Naive OLS</h2>
 <p>Suppose we collect equilibrium <span class="math inline">\((P, Q)\)</span> data and regress <span class="math inline">\(Q\)</span> on <span class="math inline">\(P\)</span>:</p>
-<div id="db5d0cf7" class="cell" data-execution_count="1">
+<div id="4ef9ac45" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1186,7 +1186,7 @@ Q^s = \gamma_0 + \gamma_1 P + U^s
 </section>
 <section id="simultaneity-identification" class="slide level2 center">
 <h2>Simultaneity — Identification</h2>
-<div id="a532324a" class="cell" data-execution_count="2">
+<div id="49d6ec53" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1357,8 +1357,9 @@ Y = \beta_0 + \beta_1 E + (U - \beta_1 V)
 <div class="fragment">
 <p>Such a variable <span class="math inline">\(Z\)</span> is called an <strong>instrumental variable</strong> (or <strong>instrument</strong>).</p>
 <ul>
+<li><strong>Omitted variables</strong>: a variable that shifts <span class="math inline">\(X\)</span> via a channel unrelated to the confounder.</li>
 <li><strong>Simultaneity</strong>: a supply shifter (input costs, weather) is an instrument for price.</li>
-<li><strong>Measurement error</strong>: a variable correlated with the true <span class="math inline">\(E^*\)</span>, not with the noise <span class="math inline">\(V\)</span>.</li>
+<li><strong>Measurement error</strong>: a variable correlated with the true <span class="math inline">\(X^*\)</span>, not with the noise <span class="math inline">\(V\)</span>.</li>
 </ul>
 </div>
 </section>
@@ -1382,7 +1383,7 @@ Y = \beta_0 + \beta_1 E + (U - \beta_1 V)
 </section>
 <section id="dag-representation" class="slide level2 center">
 <h2>DAG Representation</h2>
-<div id="7bd93ef5" class="cell" data-execution_count="3">
+<div id="cf17a742" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1392,138 +1393,128 @@ Y = \beta_0 + \beta_1 E + (U - \beta_1 V)
 </div>
 </div>
 </section>
-<section id="example-angrist-krueger-1991" class="slide level2 center">
-<h2>Example: Angrist &amp; Krueger (1991)</h2>
-<p><strong>Question</strong>: What is the return to schooling (<span class="math inline">\(\rho\)</span>)?</p>
-<p><span class="math display">\[
-\ln W_i = \rho \, E_i + X_i&#39;\beta + u_i
-\]</span></p>
-<ul>
-<li><span class="math inline">\(W_i\)</span>: weekly wages; <span class="math inline">\(E_i\)</span>: years of schooling; <span class="math inline">\(X_i\)</span>: age, race, region</li>
-<li><strong>Data</strong>: US Census (1980), men born 1930–1939</li>
-</ul>
+<section id="example-vietnam-draft-lottery-angrist-1990" class="slide level2 center">
+<h2>Example: Vietnam Draft Lottery (Angrist 1990)</h2>
+<p><strong>Background</strong>: During the Vietnam War, the U.S. drafted young men into the military. The pre-1969 Selective Service System granted deferments — most prominently for college enrollment — which fell disproportionately on the less-educated and was widely seen as unfair.</p>
 <div class="fragment">
-<p><strong>The problem</strong>: OLS on this equation is biased — ability, motivation, and family background are in <span class="math inline">\(u_i\)</span> and correlated with <span class="math inline">\(E_i\)</span>.</p>
+<p><strong>The lottery (1970–72)</strong>: To equalize exposure, draft priority was assigned by <strong>random lottery on date of birth</strong> — capsules drawn live on national TV. Each date received a <strong>random sequence number (RSN)</strong> from 1 to 365; low numbers were called first. For the 1950 cohort, <span class="math inline">\(\text{RSN} \leq 195\)</span> meant <strong>draft-eligible</strong>.</p>
+</div>
+<div class="fragment">
+<p><strong>Question</strong>: What is the causal effect of military service on later civilian earnings?</p>
+<ul>
+<li><span class="math inline">\(Y\)</span>: civilian earnings in 1981 (10 years after)</li>
+<li><span class="math inline">\(D\)</span>: Vietnam-era veteran status (binary)</li>
+<li><span class="math inline">\(Z\)</span>: lottery eligibility (<span class="math inline">\(\text{RSN} \leq 195\)</span>, binary)</li>
+</ul>
 </div>
 </section>
-<section id="ak-the-instrument" class="slide level2 center">
-<h2>AK — The Instrument</h2>
-<p><strong>Instrument</strong>: Quarter of birth (<span class="math inline">\(Z\)</span>).</p>
+<section id="why-the-lottery-as-instrument" class="slide level2 center">
+<h2>Why the Lottery as Instrument?</h2>
 <div class="fragment">
-<p><strong>Why it affects schooling</strong>: Districts enrolled children in 1st grade during the calendar year they turned 6 — so Q4 kids entered ~1 year younger than Q1 kids. Compulsory schooling ends at 16, so Q1 kids reach the dropout age with fewer completed grades.</p>
+<p><strong>Relevance</strong>: Eligibility raises the probability of veteran status.</p>
+<ul>
+<li>Eligible: 35% became veterans</li>
+<li>Non-eligible: 19% became veterans</li>
+<li>Effect of <span class="math inline">\(Z\)</span> on <span class="math inline">\(D\)</span>: ~16 percentage points</li>
+</ul>
 </div>
 <div class="fragment">
-<ul>
-<li><strong>Relevance</strong>: Quarter of birth shifts years of schooling — small effect, but precisely estimated given the large sample (<span class="math inline">\(n \approx 300{,}000\)</span>).</li>
-<li><strong>Exogeneity</strong>: Quarter of birth is plausibly unrelated to ability or other wage determinants. Debatable — Bound, Jaeger &amp; Baker (1995).</li>
-</ul>
+<p><strong>Exogeneity</strong>: RSN is assigned by date of birth — <em>literally random</em>. No selection on ability, motivation, or family background.</p>
+</div>
+<div class="fragment">
+<p><strong>Why we still need IV</strong>: not everyone eligible served (deferments, failed physicals); some non-eligible served voluntarily. So <span class="math inline">\(Z \neq D\)</span> — the lottery shifts but does not determine veteran status.</p>
 </div>
 </section>
 <section id="iv-intuition" class="slide level2 center">
 <h2>IV Intuition</h2>
-<p>OLS uses <strong>all</strong> variation in <span class="math inline">\(X\)</span> — including the part correlated with the error <span class="math inline">\(U\)</span>.</p>
+<p>OLS comparing veterans to non-veterans uses <strong>all</strong> variation in <span class="math inline">\(D\)</span> — including the part driven by self-selection.</p>
 <div class="fragment">
-<p>IV uses <strong>only the variation in <span class="math inline">\(X\)</span> that is driven by <span class="math inline">\(Z\)</span></strong>.</p>
+<p>IV uses <strong>only the variation in <span class="math inline">\(D\)</span> driven by the lottery</strong> — the random part.</p>
 <ul>
-<li>Since <span class="math inline">\(Z\)</span> is uncorrelated with <span class="math inline">\(U\)</span>, this variation is “clean.”</li>
-<li>The price: we discard variation, so IV is less efficient than OLS.</li>
+<li>Since <span class="math inline">\(Z\)</span> is random, that variation is exogenous <em>by design</em>.</li>
+<li>The price: most of the variation in <span class="math inline">\(D\)</span> is discarded (only ~16 pp is moved by <span class="math inline">\(Z\)</span>), so IV is less efficient.</li>
 </ul>
 </div>
 </section>
-<section id="iv-estimator-setup" class="slide level2 center">
-<h2>IV Estimator — Setup</h2>
-<p>We now turn the IV idea into an estimator.</p>
+<section id="three-natural-estimators" class="slide level2 center">
+<h2>Three Natural Estimators</h2>
 <div class="fragment">
-<p><strong>Model</strong>: <span class="math inline">\(Y = \beta_0 + \beta_1 X + U\)</span>, with <span class="math inline">\(E[U] = 0\)</span>.</p>
+<p><strong>1. ITT</strong> (Intent-to-Treat): <span class="math inline">\(\widehat{\text{ITT}} = \bar Y_{Z=1} - \bar Y_{Z=0}\)</span></p>
+<p>Effect of <em>being eligible</em> — clean, but not the effect of <em>serving</em>.</p>
 </div>
 <div class="fragment">
-<p><strong>IV conditions</strong> (covariance form):</p>
-<ul>
-<li>Relevance: <span class="math inline">\(\text{Cov}(Z, X) \neq 0\)</span></li>
-<li>Exogeneity: <span class="math inline">\(\text{Cov}(Z, U) = 0\)</span></li>
-</ul>
-</div>
-</section>
-<section id="iv-estimator-derivation" class="slide level2 center">
-<h2>IV Estimator — Derivation</h2>
-<p>Take <span class="math inline">\(\text{Cov}(Z, \cdot)\)</span> of both sides of <span class="math inline">\(Y = \beta_0 + \beta_1 X + U\)</span>:</p>
-<p><span class="math display">\[
-\text{Cov}(Z, Y) = \beta_1 \text{Cov}(Z, X) + \underbrace{\text{Cov}(Z, U)}_{=\,0 \text{ by exogeneity}}
-\]</span></p>
-<div class="fragment">
-<p>Solving for <span class="math inline">\(\beta_1\)</span>:</p>
-<p><span class="math display">\[
-\beta_1 = \frac{\text{Cov}(Z, Y)}{\text{Cov}(Z, X)}
-\]</span></p>
+<p><strong>2. As-Treated</strong>: <span class="math inline">\(\hat\beta^{OLS} = \bar Y_{D=1} - \bar Y_{D=0}\)</span></p>
+<p>Effect of <em>being a veteran</em> — but biased: <span class="math inline">\(D\)</span> is self-selected on unobservables.</p>
 </div>
 <div class="fragment">
-<p>The <strong>IV estimator</strong> replaces population covariances with sample covariances:</p>
-<p><span class="math display">\[
-\hat\beta_1^{IV} = \frac{\widehat{\text{Cov}}(Z, Y)}{\widehat{\text{Cov}}(Z, X)}
-\]</span></p>
+<p><strong>3. IV / Wald</strong>: <span class="math inline">\(\hat\beta^{IV} = \dfrac{\bar Y_{Z=1} - \bar Y_{Z=0}}{\bar D_{Z=1} - \bar D_{Z=0}}\)</span></p>
+<p>ITT scaled by the effect of <span class="math inline">\(Z\)</span> on <span class="math inline">\(D\)</span>. Why is this the right thing to compute?</p>
 </div>
 </section>
-<section id="iv-estimator-consistency" class="slide level2 center">
-<h2>IV Estimator — Consistency</h2>
-<p>By the Law of Large Numbers:</p>
-<p><span class="math display">\[
-\widehat{\text{Cov}}(Z, Y) \xrightarrow{p} \text{Cov}(Z, Y), \quad \widehat{\text{Cov}}(Z, X) \xrightarrow{p} \text{Cov}(Z, X)
-\]</span></p>
+<section id="iv-the-wald-ratio" class="slide level2 center">
+<h2>IV — The Wald Ratio</h2>
+<p>Start from <span class="math inline">\(Y = \beta_0 + \beta_1 D + U\)</span> with exogeneity <span class="math inline">\(\text{Cov}(Z, U) = 0\)</span>.</p>
 <div class="fragment">
-<p>By the continuous mapping theorem (ratio of convergent sequences, denominator <span class="math inline">\(\neq 0\)</span>):</p>
+<p>Take expectations conditional on <span class="math inline">\(Z\)</span>:</p>
 <p><span class="math display">\[
-\hat\beta_1^{IV} \xrightarrow{p} \frac{\text{Cov}(Z, Y)}{\text{Cov}(Z, X)} = \beta_1
+E[Y \mid Z = z] = \beta_0 + \beta_1 E[D \mid Z = z] + E[U \mid Z = z]
 \]</span></p>
 </div>
 <div class="fragment">
-<p><strong>Regularity conditions</strong>: i.i.d. sampling, finite second moments, relevance (<span class="math inline">\(\text{Cov}(Z, X) \neq 0\)</span>).</p>
+<p>Differencing <span class="math inline">\(Z=1\)</span> and <span class="math inline">\(Z=0\)</span>, with <span class="math inline">\(E[U \mid Z=1] = E[U \mid Z=0]\)</span> by exogeneity:</p>
+<p><span class="math display">\[
+E[Y \mid Z{=}1] - E[Y \mid Z{=}0] = \beta_1 \big(E[D \mid Z{=}1] - E[D \mid Z{=}0]\big)
+\]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\beta_1 = \frac{E[Y \mid Z{=}1] - E[Y \mid Z{=}0]}{E[D \mid Z{=}1] - E[D \mid Z{=}0]} \quad \text{(Wald ratio)}
+\]</span></p>
 </div>
 </section>
-<section id="iv-estimator-ak-numbers" class="slide level2 center">
-<h2>IV Estimator — AK Numbers</h2>
-<p>Angrist &amp; Krueger (1991), men born 1930–39, 1980 Census (Table V):</p>
+<section id="angrist-numbers" class="slide level2 center">
+<h2>Angrist Numbers</h2>
+<p>White men born 1950, 1981 earnings (MHE Table 4.1.3):</p>
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th>Estimator</th>
-<th>Estimate</th>
-<th>SE</th>
+<th>Quantity</th>
+<th style="text-align: right;">Estimate</th>
+<th style="text-align: right;">SE</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>OLS</td>
-<td>0.071</td>
-<td>&lt; 0.001</td>
+<td>Mean 1981 earnings</td>
+<td style="text-align: right;">$16,461</td>
+<td style="text-align: right;">—</td>
 </tr>
 <tr class="even">
-<td>IV (QoB <span class="math inline">\(\times\)</span> year-of-birth)</td>
-<td>0.089</td>
-<td>0.016</td>
+<td><span class="math inline">\(\bar Y_{Z=1} - \bar Y_{Z=0}\)</span></td>
+<td style="text-align: right;">-$435.8</td>
+<td style="text-align: right;">210.5</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\bar D_{Z=1} - \bar D_{Z=0}\)</span></td>
+<td style="text-align: right;">0.159</td>
+<td style="text-align: right;">0.040</td>
+</tr>
+<tr class="even">
+<td><strong>Wald</strong></td>
+<td style="text-align: right;"><strong>-$2,741</strong></td>
+<td style="text-align: right;"><strong>1,324</strong></td>
 </tr>
 </tbody>
 </table>
 <div class="fragment">
-<p><strong>The puzzle</strong> (Card, 1999, 2001): IV <span class="math inline">\(\geq\)</span> OLS is surprising under the prior that ability bias inflates OLS upward. The gap is small relative to the IV standard error, but systematic across specs.</p>
-</div>
-</section>
-<section id="explaining-the-puzzle" class="slide level2 center">
-<h2>Explaining the Puzzle</h2>
-<p><strong>Two (complementary) explanations</strong>:</p>
-<div class="fragment">
-<ol type="1">
-<li><strong>Measurement error</strong> (Griliches 1977, Card 2001): reporting noise in schooling attenuates OLS downward, offsetting part of the ability upward bias — but not all of it.</li>
-</ol>
-</div>
-<div class="fragment">
-<ol start="2" type="1">
-<li><strong>LATE <span class="math inline">\(&gt;\)</span> ATE</strong>: IV identifies the complier-specific return. If dropout-margin students have higher returns than average, IV exceeds OLS even without OLS bias. We turn to this next.</li>
-</ol>
+<ul>
+<li>Wald estimate is ~17% of mean civilian earnings.</li>
+</ul>
 </div>
 </section>
 <section id="what-does-iv-estimate" class="slide level2 center">
 <h2>What Does IV Estimate?</h2>
-<p>The IV estimator is consistent for <span class="math inline">\(\beta_1\)</span> — a regression coefficient. But what <strong>causal quantity</strong> does <span class="math inline">\(\beta_1\)</span> identify? Under what assumptions?</p>
+<p>The Wald ratio identifies <span class="math inline">\(\beta_1\)</span> — a regression coefficient. But what <strong>causal quantity</strong> does <span class="math inline">\(\beta_1\)</span> correspond to? Under what assumptions?</p>
 <div class="fragment">
 <ul>
 <li><strong>RCT case (Lecture 1)</strong>: <span class="math inline">\(D \perp\!\!\!\perp (Y(0), Y(1)) \Rightarrow \beta_1 = E[Y(1) - Y(0)] = \text{ATE}\)</span>.</li>
@@ -1541,22 +1532,24 @@ Y = \beta_0 + \beta_1 E + (U - \beta_1 V)
 <p>To derive this, we need potential outcomes for the <strong>treatment</strong> as well as <span class="math inline">\(Y\)</span>.</p>
 </div>
 </section>
-<section id="potential-outcomes-for-treatment" class="slide level2 center">
-<h2>Potential Outcomes for Treatment</h2>
-<p><strong>Potential outcomes take two arguments</strong>: <span class="math inline">\(Y_i(z, d)\)</span> = the outcome for unit <span class="math inline">\(i\)</span> if <span class="math inline">\(Z = z\)</span> and <span class="math inline">\(D = d\)</span>.</p>
+<section id="potential-outcomes-in-iv" class="slide level2 center">
+<h2>Potential Outcomes in IV</h2>
+<p>In an IV setting, both <span class="math inline">\(D\)</span> and <span class="math inline">\(Y\)</span> have potential values:</p>
 <div class="fragment">
-<p><em>Example (AK)</em>: a Q1-born student’s wage could differ from a Q4-born’s <em>not only</em> via completed schooling — potentially also via direct season-of-birth effects on health or cohort composition.</p>
+<p><strong>Potential treatment</strong>: <span class="math inline">\(D_i(z)\)</span> = the treatment unit <span class="math inline">\(i\)</span> would take if <span class="math inline">\(Z = z\)</span>.</p>
+<p>Captures how <span class="math inline">\(Z\)</span> moves <span class="math inline">\(D\)</span> for each individual.</p>
 </div>
 <div class="fragment">
-<p><strong>Potential treatment</strong> <span class="math inline">\(D_i(z)\)</span>: the treatment a unit would take if assigned instrument value <span class="math inline">\(z\)</span>.</p>
+<p><strong>Potential outcome</strong>: <span class="math inline">\(Y_i(z, d)\)</span> = the outcome unit <span class="math inline">\(i\)</span> would have if <span class="math inline">\(Z = z\)</span> and <span class="math inline">\(D = d\)</span>.</p>
+<p>The two arguments allow <span class="math inline">\(Z\)</span> to enter <span class="math inline">\(Y\)</span> both through <span class="math inline">\(D\)</span> and directly. For IV to be valid, <span class="math inline">\(Z\)</span> must enter <strong>only through <span class="math inline">\(D\)</span></strong>: <span class="math inline">\(Y_i(z, d) = Y_i(d)\)</span> — the <strong>exclusion restriction</strong>.</p>
 </div>
 <div class="fragment">
-<p><strong>SUTVA</strong> (background assumption): <span class="math inline">\(Y_i = Y_i(Z_i, D_i)\)</span> — the observed outcome is the potential outcome evaluated at the realized <span class="math inline">\((Z_i, D_i)\)</span>. And no interference across units.</p>
+<p>The observed pair <span class="math inline">\((D_i, Y_i)\)</span> corresponds to the realized <span class="math inline">\(Z_i\)</span>.</p>
 </div>
 </section>
 <section id="compliance-types" class="slide level2 center">
 <h2>Compliance Types</h2>
-<p>Specialize to <strong>binary</strong> <span class="math inline">\(Z \in \{0,1\}\)</span> and <strong>binary</strong> <span class="math inline">\(D \in \{0,1\}\)</span>. The pair <span class="math inline">\((D(0), D(1))\)</span> then takes one of four possible values:</p>
+<p>Each unit’s <span class="math inline">\((D_i(0), D_i(1))\)</span> classifies how it responds to <span class="math inline">\(Z\)</span>:</p>
 <div class="fragment">
 <table class="caption-top">
 <thead>
@@ -1564,7 +1557,7 @@ Y = \beta_0 + \beta_1 E + (U - \beta_1 V)
 <th>Type</th>
 <th><span class="math inline">\(D(0)\)</span></th>
 <th><span class="math inline">\(D(1)\)</span></th>
-<th>Behavior</th>
+<th>Lottery analog</th>
 </tr>
 </thead>
 <tbody>
@@ -1572,31 +1565,34 @@ Y = \beta_0 + \beta_1 E + (U - \beta_1 V)
 <td><strong>Complier</strong></td>
 <td>0</td>
 <td>1</td>
-<td>Takes treatment when encouraged</td>
+<td>Drafted; would not have served otherwise</td>
 </tr>
 <tr class="even">
 <td><strong>Always-taker</strong></td>
 <td>1</td>
 <td>1</td>
-<td>Always takes treatment</td>
+<td>Volunteer; serves regardless of lottery</td>
 </tr>
 <tr class="odd">
 <td><strong>Never-taker</strong></td>
 <td>0</td>
 <td>0</td>
-<td>Never takes treatment</td>
+<td>Deferred or disqualified</td>
 </tr>
 <tr class="even">
 <td><strong>Defier</strong></td>
 <td>1</td>
 <td>0</td>
-<td>Does the opposite</td>
+<td>Opposite (no natural analog here)</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="fragment">
-<p>These types are <strong>latent</strong> — we cannot observe which type a person is.</p>
+<ul>
+<li>Types are <strong>latent</strong>: we observe <span class="math inline">\(D_i\)</span>, not <span class="math inline">\((D_i(0), D_i(1))\)</span> separately.</li>
+<li>Only <strong>compliers</strong> respond to <span class="math inline">\(Z\)</span> — always-takers and never-takers are unmoved by the instrument.</li>
+</ul>
 </div>
 </section>
 <section id="late-assumptions" class="slide level2 center">
@@ -1604,8 +1600,8 @@ Y = \beta_0 + \beta_1 E + (U - \beta_1 V)
 <ol type="1">
 <li><strong>Exogeneity</strong> (structural — on the counterfactual DGP):
 <ul>
-<li><strong>Independence</strong>: <span class="math inline">\(Z \perp\!\!\!\perp (Y(z, d), D(z))\)</span> for all <span class="math inline">\(z, d\)</span>.</li>
-<li><strong>Exclusion</strong>: <span class="math inline">\(Y_i(z, d) = Y_i(d)\)</span> — no direct <span class="math inline">\(Z \to Y\)</span> channel.</li>
+<li><strong>Independence</strong>: <span class="math inline">\(Z \perp\!\!\!\perp (Y(z, d), D(z))\)</span> for all <span class="math inline">\(z, d\)</span>. <em>Lottery</em>: guaranteed by randomization.</li>
+<li><strong>Exclusion</strong>: <span class="math inline">\(Y_i(z, d) = Y_i(d)\)</span> — no direct <span class="math inline">\(Z \to Y\)</span> channel. <em>Lottery</em>: violated if low-<span class="math inline">\(Z\)</span> men enroll in college to avoid the draft, shifting <span class="math inline">\(Y\)</span> through schooling rather than <span class="math inline">\(D\)</span>.</li>
 </ul>
 These structural restrictions <strong>imply</strong> the IV moment condition <span class="math inline">\(\text{Cov}(Z, U) = 0\)</span>.</li>
 </ol>
@@ -1619,13 +1615,6 @@ These structural restrictions <strong>imply</strong> the IV moment condition <sp
 <li><strong>Monotonicity</strong>: <span class="math inline">\(D(1) \geq D(0)\)</span> for all units — no defiers.</li>
 </ol>
 </div>
-</section>
-<section id="iv-estimand-for-binary-z" class="slide level2 center">
-<h2>IV Estimand for Binary <span class="math inline">\(Z\)</span></h2>
-<p>For binary <span class="math inline">\(Z\)</span>, the IV estimand simplifies to the <strong>Wald ratio</strong>:</p>
-<p><span class="math display">\[
-\frac{\text{Cov}(Z, Y)}{\text{Cov}(Z, D)} = \frac{E[Y \mid Z=1] - E[Y \mid Z=0]}{E[D \mid Z=1] - E[D \mid Z=0]}
-\]</span></p>
 </section>
 <section id="late-statement" class="slide level2 center">
 <h2>LATE — Statement</h2>
@@ -1707,43 +1696,84 @@ E[D \mid Z=1] - E[D \mid Z=0] = P(C)
 <p>When is LATE = ATE?</p>
 <p>Think about what property of individual treatment effects <span class="math inline">\(Y_i(1) - Y_i(0)\)</span> would make the “complier-specific” distinction irrelevant.</p>
 </section>
-<section id="late-ak-revisited" class="slide level2 center">
-<h2>LATE — AK Revisited</h2>
-<p><strong>Who are the compliers in Angrist-Krueger?</strong></p>
-<div class="fragment">
-<ul>
-<li>Students whose schooling is affected by quarter of birth + compulsory schooling laws.</li>
-<li>These are students near the <strong>dropout threshold</strong> — they would leave school at the minimum age if allowed.</li>
-</ul>
-</div>
-<div class="fragment">
-<p>Card (1999, 2001) argues compliers face <strong>borrowing constraints</strong>: they would have stayed in school longer if they could afford to. By selection, this group has <strong>high marginal returns</strong> — students with low returns wouldn’t have wanted more schooling, so credit constraints only bind for those who would benefit from more.</p>
-</div>
-<div class="fragment">
-<ul>
-<li>So LATE <span class="math inline">\(&gt;\)</span> ATE: the compliers benefit more than the average person.</li>
-<li>Combined with the ME/ability bias offset noted earlier, this explains why IV <span class="math inline">\(\geq\)</span> OLS.</li>
-</ul>
-</div>
-</section>
 <section id="late-beyond-the-binary-case" class="slide level2 center">
 <h2>LATE — Beyond the Binary Case</h2>
 <p>The LATE theorem is for binary <span class="math inline">\(Z\)</span> and binary <span class="math inline">\(D\)</span>. In practice:</p>
 <div class="fragment">
 <ul>
-<li><strong>Non-binary <span class="math inline">\(D\)</span></strong> (e.g., years of schooling): IV estimand is a weighted average of effects along the treatment ladder.</li>
-<li><strong>Non-binary <span class="math inline">\(Z\)</span></strong> (e.g., AK’s 4-valued quarter of birth): IV estimand is a weighted average of pairwise LATEs.</li>
+<li><strong>Non-binary <span class="math inline">\(D\)</span></strong> (e.g., years of schooling): IV identifies a weighted average of effects along the treatment ladder.</li>
 </ul>
+</div>
+<div class="fragment">
+<ul>
+<li><strong>Non-binary <span class="math inline">\(Z\)</span></strong> (e.g., a multi-valued instrument): IV identifies a weighted average of pairwise LATEs.</li>
+</ul>
+</div>
+</section>
+<section id="late-angrist-revisited" class="slide level2 center">
+<h2>LATE — Angrist Revisited</h2>
+<p><strong>Who are the compliers in Angrist (1990)?</strong></p>
+<div class="fragment">
+<ul>
+<li>Men whose veteran status is shifted by the lottery — they would serve if drafted, but not voluntarily.</li>
+<li>Pulled into service by a low draft number.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><strong>Always-takers</strong>: volunteers — would serve regardless of the lottery.</li>
+<li><strong>Never-takers</strong>: deferred or disqualified — would not serve regardless.</li>
+<li><strong>Compliers</strong>: would prefer civilian life but accepted the draft.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>LATE <span class="math inline">\(\approx\)</span> -17% of earnings is the effect on <strong>compliers</strong> — men with relatively better civilian alternatives.</li>
+<li>The ATE (averaged over volunteers + compliers) is likely smaller in magnitude — volunteers self-selected into service, so it was (in expectation) beneficial for them.</li>
+</ul>
+</div>
+</section>
+<section id="threats-to-the-story" class="slide level2 center">
+<h2>Threats to the Story</h2>
+<p>The Wald ratio identifies <span class="math inline">\(\beta_1\)</span> only under <strong>exogeneity</strong>: <span class="math inline">\(\text{Cov}(Z, U) = 0\)</span>. We argued this from random assignment.</p>
+<div class="fragment">
+<p><strong>But random <span class="math inline">\(Z\)</span> alone is not enough.</strong> If <span class="math inline">\(Z\)</span> shifts <span class="math inline">\(Y\)</span> through channels other than <span class="math inline">\(D\)</span>, those channels live in <span class="math inline">\(U\)</span> — and <span class="math inline">\(\text{Cov}(Z, U) \neq 0\)</span> even when <span class="math inline">\(Z\)</span> is random.</p>
+</div>
+<div class="fragment">
+<p><strong>Lottery responses</strong> (men with low numbers had months to act):</p>
+<ul>
+<li>Enrolled in college for student deferments (II-S).</li>
+<li>Volunteered preemptively to choose their branch.</li>
+<li>Marriage / dependents → hardship deferments.</li>
+</ul>
+<p>These shift schooling, family timing, occupation — affecting earnings without going through veteran status.</p>
+</div>
+<div class="fragment">
+<p>So the IV may be biased even though <span class="math inline">\(Z\)</span> was randomly assigned. <strong>Random assignment is necessary for exogeneity, not sufficient.</strong></p>
+</div>
+</section>
+<section id="summary" class="slide level2 center">
+<h2>Summary</h2>
+<p>When OLS fails, an instrument <span class="math inline">\(Z\)</span> that is <strong>relevant</strong> (shifts <span class="math inline">\(X\)</span>) and <strong>exogenous</strong> (uncorrelated with <span class="math inline">\(U\)</span>) identifies <span class="math inline">\(\beta_1\)</span> via the Wald ratio.</p>
+<div class="fragment">
+<p><strong>Causal interpretation (LATE)</strong>: with binary <span class="math inline">\(Z, D\)</span> + monotonicity, the Wald ratio identifies the average effect on <strong>compliers</strong> — those moved by <span class="math inline">\(Z\)</span>. Not the ATE.</p>
+<ul>
+<li>LATE is local: applies only to compliers; different instruments give different LATEs.</li>
+<li>Beyond binary <span class="math inline">\(Z\)</span> or <span class="math inline">\(D\)</span>: IV identifies a weighted average of effects.</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Exogeneity is the binding assumption</strong> — argued from theory, not testable in the just-identified case. Even random assignment doesn’t make it free.</p>
 </div>
 </section>
 <section id="whats-next" class="slide level2 center">
 <h2>What’s Next</h2>
 <p><strong>Lecture 5b — IV Estimation</strong>:</p>
 <ul>
+<li>The IV estimator: sample analog and consistency</li>
 <li>2SLS: multiple instruments and controls</li>
-<li>Properties: consistency, asymptotic normality, efficiency</li>
-<li>Weak instruments</li>
-<li>Application: Angrist &amp; Lavy (1999)</li>
+<li>Diagnostics: weak instruments, overidentification, endogeneity test</li>
+<li>Applications</li>
 </ul>
 
 </section>
