@@ -1171,7 +1171,7 @@ Q^s = \gamma_0 + \gamma_1 P + U^s
 <section id="simultaneity-the-naive-ols" class="slide level2 center">
 <h2>Simultaneity — The Naive OLS</h2>
 <p>Suppose we collect equilibrium <span class="math inline">\((P, Q)\)</span> data and regress <span class="math inline">\(Q\)</span> on <span class="math inline">\(P\)</span>:</p>
-<div id="4ef9ac45" class="cell" data-execution_count="1">
+<div id="c36bb56e" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1186,7 +1186,7 @@ Q^s = \gamma_0 + \gamma_1 P + U^s
 </section>
 <section id="simultaneity-identification" class="slide level2 center">
 <h2>Simultaneity — Identification</h2>
-<div id="49d6ec53" class="cell" data-execution_count="2">
+<div id="fe714a93" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1383,7 +1383,7 @@ Y = \beta_0 + \beta_1 E + (U - \beta_1 V)
 </section>
 <section id="dag-representation" class="slide level2 center">
 <h2>DAG Representation</h2>
-<div id="cf17a742" class="cell" data-execution_count="3">
+<div id="0c0b9cee" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1750,6 +1750,22 @@ E[D \mid Z=1] - E[D \mid Z=0] = P(C)
 </div>
 <div class="fragment">
 <p>So the IV may be biased even though <span class="math inline">\(Z\)</span> was randomly assigned. <strong>Random assignment is necessary for exogeneity, not sufficient.</strong></p>
+</div>
+</section>
+<section id="sanity-checks-angrist-1990" class="slide level2 center">
+<h2>Sanity Checks (Angrist 1990)</h2>
+<p>What can we check, given these threats?</p>
+<div class="fragment">
+<p><strong>Pre-service placebo</strong>: if <span class="math inline">\(Z\)</span> is truly random, it shouldn’t predict outcomes from <em>before</em> service. Computing <span class="math inline">\(\bar Y_{Z=1} - \bar Y_{Z=0}\)</span> on <strong>1969 earnings</strong> (pre-lottery): -$2 (SE 34.5) — statistically zero. ✓ Independence is empirically supported.</p>
+</div>
+<div class="fragment">
+<p><strong>Schooling response</strong> (Angrist &amp; Krueger 1995): the lottery raised completed schooling by ~0.1 extra years on average. The exclusion violation through schooling exists but is small in magnitude.</p>
+</div>
+<div class="fragment">
+<p><strong>Stability</strong>: Angrist’s IV estimates are similar across race subgroups, birth cohorts (1950–53), and outcome years (1981–84).</p>
+</div>
+<div class="fragment">
+<p>None of these <em>prove</em> exclusion. They make the identification more credible.</p>
 </div>
 </section>
 <section id="summary" class="slide level2 center">
