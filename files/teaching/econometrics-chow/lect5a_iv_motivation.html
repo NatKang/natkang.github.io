@@ -1171,7 +1171,7 @@ Q^s = \gamma_0 + \gamma_1 P + U^s
 <section id="simultaneity-the-naive-ols" class="slide level2 center">
 <h2>Simultaneity — The Naive OLS</h2>
 <p>Suppose we collect equilibrium <span class="math inline">\((P, Q)\)</span> data and regress <span class="math inline">\(Q\)</span> on <span class="math inline">\(P\)</span>:</p>
-<div id="9bc977e9" class="cell" data-execution_count="1">
+<div id="173a685a" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1186,7 +1186,7 @@ Q^s = \gamma_0 + \gamma_1 P + U^s
 </section>
 <section id="simultaneity-identification" class="slide level2 center">
 <h2>Simultaneity — Identification</h2>
-<div id="d5c2e3a7" class="cell" data-execution_count="2">
+<div id="b354529a" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1383,7 +1383,7 @@ Y = \beta_0 + \beta_1 E + (U - \beta_1 V)
 </section>
 <section id="dag-representation" class="slide level2 center">
 <h2>DAG Representation</h2>
-<div id="28d9f3d1" class="cell" data-execution_count="3">
+<div id="d9187c44" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1601,7 +1601,7 @@ E[Y \mid Z{=}1] - E[Y \mid Z{=}0] = \beta_1 \big(E[D \mid Z{=}1] - E[D \mid Z{=}
 <li><strong>Exogeneity</strong> (structural — on the counterfactual DGP):
 <ul>
 <li><strong>Independence</strong>: <span class="math inline">\(Z \perp\!\!\!\perp (Y(z, d), D(z))\)</span> for all <span class="math inline">\(z, d\)</span>. <em>Lottery</em>: guaranteed by randomization.</li>
-<li><strong>Exclusion</strong>: <span class="math inline">\(Y_i(z, d) = Y_i(d)\)</span> — no direct <span class="math inline">\(Z \to Y\)</span> channel. <em>Lottery</em>: violated if low-<span class="math inline">\(Z\)</span> men enroll in college to avoid the draft, shifting <span class="math inline">\(Y\)</span> through schooling rather than <span class="math inline">\(D\)</span>.</li>
+<li><strong>Exclusion</strong>: <span class="math inline">\(Y_i(z, d) = Y_i(d)\)</span> — no direct <span class="math inline">\(Z \to Y\)</span> channel. <em>Lottery</em>: violated if draft-eligible (<span class="math inline">\(Z=1\)</span>) men enroll in college to avoid serving, shifting <span class="math inline">\(Y\)</span> through schooling rather than <span class="math inline">\(D\)</span>.</li>
 </ul>
 These structural restrictions <strong>imply</strong> the IV moment condition <span class="math inline">\(\text{Cov}(Z, U) = 0\)</span>.</li>
 </ol>
