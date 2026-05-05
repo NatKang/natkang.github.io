@@ -1142,7 +1142,7 @@ Natasha Kang
     </div>
 </div>
 
-  <p class="date">April, 2026</p>
+  <p class="date">May, 2026</p>
 </section>
 <section id="recall-adl-models" class="slide level2 center">
 <h2>Recall: ADL Models</h2>
@@ -1556,7 +1556,7 @@ X&#39;\Omega^{-1}X = (\Sigma_u^{-1} \otimes Z&#39;)(I_m \otimes Z) = \Sigma_u^{-
 </section>
 <section id="dimensionality-in-var-models" class="slide level2 center">
 <h2>Dimensionality in VAR Models</h2>
-<p>The reduced-form VAR(<span class="math inline">\(p\)</span>) <span class="math inline">\(x_t = A_1 x_{t-1} + \cdots + A_p x_{t-p} + u_t\)</span> contains</p>
+<p>The reduced-form VAR(<span class="math inline">\(p\)</span>) <span class="math inline">\(x_t = \nu + A_1 x_{t-1} + \cdots + A_p x_{t-p} + u_t\)</span> contains</p>
 <p><span class="math display">\[
 m^2 p + m
 \]</span></p>
@@ -1844,8 +1844,8 @@ u_t \sim N(0,\Sigma_u).
 <p>Maximizing the likelihood is equivalent to minimizing the weighted sum of squared residuals.</p>
 </div>
 </section>
-<section id="profile-out-σ_u" class="slide level2 center">
-<h2>Profile Out Σ_u</h2>
+<section id="profile-out-sigma_u" class="slide level2 center">
+<h2>Profile Out <span class="math inline">\(\Sigma_u\)</span></h2>
 <p>For fixed <span class="math inline">\(\Pi\)</span>, maximizing the Gaussian log-likelihood over <span class="math inline">\(\Sigma_u\)</span> gives <span class="math display">\[
 \widehat\Sigma_u(\Pi) = \tfrac{1}{T}\sum_{t=1}^T (R_{0t} - \Pi R_{1t})(R_{0t} - \Pi R_{1t})&#39;.
 \]</span></p>
@@ -1896,68 +1896,124 @@ S_{10}S_{00}^{-1}S_{01}\,v = \lambda\,S_{11}\,v.
 \]</span> <span class="math inline">\(\widehat\beta_r\)</span> = the top-<span class="math inline">\(r\)</span> eigenvectors.</p>
 </div>
 <div class="fragment">
-<p><strong>Remark.</strong> The eigenvalues <span class="math inline">\(\widehat\lambda_i\)</span> are the squared canonical correlations between <span class="math inline">\(R_{0t}\)</span> and <span class="math inline">\(R_{1t}\)</span> — the Johansen estimator is canonical-correlation analysis between residualized differences and levels.</p>
+<p><strong>Remark.</strong> The eigenvalues <span class="math inline">\(\widehat\lambda_i\)</span> are the squared canonical correlations between <span class="math inline">\(R_{0t}\)</span> and <span class="math inline">\(R_{1t}\)</span> — Johansen is <strong>canonical correlation analysis (CCA)</strong> between residualized differences and levels.</p>
+<p><em>Why:</em> CCA’s eigenproblem <span class="math inline">\(\Sigma_{YY}^{-1}\Sigma_{YX}\Sigma_{XX}^{-1}\Sigma_{XY}\,b = \rho^2\,b\)</span> becomes <span class="math inline">\(S_{11}^{-1}S_{10}S_{00}^{-1}S_{01}\,v = \lambda\,v\)</span> once <span class="math inline">\(X = R_{0t},\ Y = R_{1t}\)</span> — identical to Johansen, so <span class="math inline">\(\widehat\lambda_i = \widehat\rho_i^{\,2}\)</span>.</p>
 </div>
 
 <aside><div>
 <p>Full derivation: §6 of <code>unit7_johansen_derivation.pdf</code>.</p>
 </div></aside></section>
-<section id="johansens-lr-rank-tests" class="slide level2 center">
-<h2>Johansen’s LR Rank Tests</h2>
-<p>For each <span class="math inline">\(r\)</span>, compare the maximized likelihood under <span class="math inline">\(H_0:\mathrm{rank}(\Pi)\le r\)</span> to the unrestricted model:</p>
-<p><span class="math display">\[
-\mathrm{LR}(r) = -2(\ell_r - \ell_m) = -T\log\frac{|\widehat\Sigma_m|}{|\widehat\Sigma_r|}.
-\]</span></p>
-<p>Computing the statistic requires the residual covariance under each model:</p>
-<ul>
-<li><span class="math inline">\(\widehat\Sigma_m\)</span> — unrestricted (full-rank <span class="math inline">\(\Pi\)</span>)</li>
-<li><span class="math inline">\(\widehat\Sigma_r\)</span> — restricted to <span class="math inline">\(\mathrm{rank}(\Pi) = r\)</span></li>
-</ul>
-</section>
-<section id="unrestricted-residual-covariance" class="slide level2 center">
-<h2>Unrestricted Residual Covariance</h2>
-<p>From the partialled-out long-run regression <span class="math inline">\(R_{0t} = \Pi R_{1t} + u_t\)</span>, the unrestricted OLS estimator is <span class="math inline">\(\widehat\Pi_{\text{OLS}} = S_{01} S_{11}^{-1}\)</span>.</p>
-<p>Plugging into <span class="math display">\[
-\widehat\Sigma(\Pi) = S_{00} - \Pi S_{10} - S_{01}\Pi&#39; + \Pi S_{11}\Pi&#39;
-\]</span> gives <span class="math display">\[
-\widehat\Sigma_m = S_{00} - S_{01} S_{11}^{-1} S_{10}.
-\]</span></p>
-</section>
-<section id="restricted-residual-covariance" class="slide level2 center">
-<h2>Restricted Residual Covariance</h2>
-<p>Under <span class="math inline">\(\mathrm{rank}(\Pi) = r\)</span>,</p>
-<p><span class="math display">\[
-\widehat\Sigma_r = S_{00} - S_{01}\beta_r\beta_r&#39; S_{10},
-\]</span></p>
-<p>where <span class="math inline">\(\beta_r\)</span> consists of the first <span class="math inline">\(r\)</span> eigenvectors solving</p>
-<p><span class="math display">\[
-S_{11}^{-1} S_{10} S_{00}^{-1} S_{01} v = \lambda v.
-\]</span></p>
-</section>
-<section id="determinants-in-eigenvalue-form" class="slide level2 center">
-<h2>Determinants in Eigenvalue Form</h2>
-<p>Define <span class="math inline">\(C := S_{00}^{-1/2} S_{01} S_{11}^{-1/2}\)</span>. Let <span class="math inline">\(\hat\lambda_1 \ge \cdots \ge \hat\lambda_m \ge 0\)</span> be the Johansen eigenvalues — equivalently, the eigenvalues of <span class="math inline">\(C&#39;C\)</span>.</p>
-<p>Eigen-decomposition of <span class="math inline">\(CC&#39;\)</span> and projection onto the top-<span class="math inline">\(r\)</span> eigenspace give:</p>
-<p><span class="math display">\[
-|\widehat\Sigma_m| = |S_{00}| \prod_{i=1}^m (1 - \hat\lambda_i),
+<section id="what-does-a-large-widehatlambda_i-mean" class="slide level2 center">
+<h2>What Does a Large <span class="math inline">\(\widehat\lambda_i\)</span> Mean?</h2>
+<p>CCA reads <span class="math inline">\(\widehat\lambda_i\)</span> off <strong>sample moments</strong>, not single-time covariances: <span class="math display">\[
+\widehat\lambda_i \;=\; \max_{a,\,b}\;\frac{(a&#39;S_{01}\,b)^2}{(a&#39;S_{00}\,a)\,(b&#39;S_{11}\,b)},
 \qquad
-|\widehat\Sigma_r| = |S_{00}| \prod_{i=1}^r (1 - \hat\lambda_i).
+S_{ij} = \tfrac{1}{T}\!\sum_{t} R_{it} R_{jt}&#39;.
 \]</span></p>
-
-<aside><div>
-<p>Full derivation: §7 of <code>unit7_johansen_derivation.pdf</code>.</p>
-</div></aside></section>
-<section id="lr-statistic-in-eigenvalue-form" class="slide level2 center">
-<h2>LR Statistic in Eigenvalue Form</h2>
-<p>Dividing,</p>
+<div class="fragment">
+<p><strong>Three asymptotic rates.</strong> With <span class="math inline">\(R_{0t} \sim I(0)\)</span> and <span class="math inline">\(b&#39;R_{1t} \sim I(1)\)</span>:</p>
+<ul>
+<li><span class="math inline">\(a&#39; S_{00}\, a \;\xrightarrow{p}\; a&#39;\Sigma_{00}\,a \;=\; O_p(1)\)</span>   (<span class="math inline">\(I(0)\times I(0)\)</span>)</li>
+<li><span class="math inline">\(b&#39; S_{11}\, b \;=\; O_p(T)\)</span>   (<span class="math inline">\(I(1)\times I(1)\)</span>: <span class="math inline">\(\mathrm{Var}(b&#39;R_{1t}) = O(t)\)</span>, sample average inflates as <span class="math inline">\(T\)</span>)</li>
+<li><span class="math inline">\(a&#39; S_{01}\, b \;=\; O_p(1)\)</span>   (<span class="math inline">\(I(0)\times I(1)\)</span>, unit-root FCLT: <span class="math inline">\(\xrightarrow{d} \int_0^1 W\,dB\)</span>)</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Putting them together:</strong> <span class="math display">\[
+\widehat\lambda_i \;=\; \frac{O_p(1)}{O_p(1)\cdot O_p(T)} \;=\; O_p(T^{-1}) \;\xrightarrow{p}\; 0.
+\]</span> The correlation washes out asymptotically — <em>unless</em> there is a special direction.</p>
+</div>
+</section>
+<section id="cointegration-as-the-escape-hatch" class="slide level2 center">
+<h2>Cointegration as the Escape Hatch</h2>
+<p>A non-vanishing <span class="math inline">\(\widehat\lambda_i\)</span> requires a <span class="math inline">\(\beta_i\)</span> such that <span class="math inline">\(\beta_i&#39;x_{t-1}\)</span> is <strong>stationary</strong>. Then <span class="math inline">\(\beta_i&#39; S_{11}\,\beta_i = O_p(1)\)</span> rather than <span class="math inline">\(O_p(T)\)</span>, and <span class="math inline">\(\widehat\lambda_i\)</span> stays bounded away from 0.</p>
 <p><span class="math display">\[
-\frac{|\widehat\Sigma_m|}{|\widehat\Sigma_r|} = \prod_{i=r+1}^m (1 - \hat\lambda_i),
+\widehat\lambda_i \;\not\xrightarrow{p}\; 0
+\;\;\Longleftrightarrow\;\;
+\beta_i&#39;x_{t-1}\sim I(0)
+\;\;\Longleftrightarrow\;\;
+\beta_i \text{ cointegrates } x_t.
 \]</span></p>
-<p>so</p>
-<p><span class="math display">\[
-\mathrm{LR}(r)
-= -T\log\frac{|\widehat\Sigma_m|}{|\widehat\Sigma_r|}
-= -T\sum_{i=r+1}^m \log(1 - \hat\lambda_i).
+</section>
+<section id="how-eigenvalues-encode-rankπ" class="slide level2 center">
+<h2>How Eigenvalues Encode rank(Π)</h2>
+<p>Each non-zero <span class="math inline">\(\lambda_i\)</span> of <span class="math inline">\(M := \Sigma_{11}^{-1}\Sigma_{10}\Sigma_{00}^{-1}\Sigma_{01}\)</span> flags a cointegrating direction. To get a <em>count</em>, chain three facts:</p>
+<div class="fragment">
+<p><strong>1.</strong> # non-zero <span class="math inline">\(\lambda_i = \mathrm{rank}(M)\)</span> — by definition.</p>
+</div>
+<div class="fragment">
+<p><strong>2.</strong> <span class="math inline">\(\mathrm{rank}(M) = \mathrm{rank}(\Pi)\)</span> — both reduce to <span class="math inline">\(\mathrm{rank}(\Sigma_{01})\)</span>, since <span class="math inline">\(\Pi = \Sigma_{01}\Sigma_{11}^{-1}\)</span> and the middle factor <span class="math inline">\(\Sigma_{10}\Sigma_{00}^{-1}\Sigma_{01}\)</span> in <span class="math inline">\(M\)</span> is a Gram matrix.</p>
+</div>
+<div class="fragment">
+<p><strong>3.</strong> <span class="math inline">\(\mathrm{rank}(\Pi)\)</span> = # cointegrating relations — from the VECM setup.</p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(\Longrightarrow\)</span> # non-zero <span class="math inline">\(\widehat\lambda_i\)</span> = # cointegrating relations.</p>
+</div>
+</section>
+<section id="eigenvalues-and-cointegrating-rank" class="slide level2 center">
+<h2>Eigenvalues and Cointegrating Rank</h2>
+<p>A single <span class="math inline">\(\widehat\lambda_i\)</span> describes one direction. Their <strong>collective pattern</strong> encodes the cointegrating rank <span class="math inline">\(r\)</span>:</p>
+<div class="fragment">
+<p><strong><span class="math inline">\(r = 0\)</span> (no cointegration; <span class="math inline">\(\Pi = 0\)</span>, <span class="math inline">\(x_t\)</span> pure <span class="math inline">\(I(1)\)</span>).</strong> All <span class="math inline">\(\widehat\lambda_i = O_p(T^{-1}) \to 0\)</span>. Every direction has the variance mismatch.</p>
+</div>
+<div class="fragment">
+<p><strong><span class="math inline">\(0 &lt; r &lt; m\)</span> (<span class="math inline">\(r\)</span> cointegrating relations).</strong> Exactly <span class="math inline">\(r\)</span> eigenvalues stay <span class="math inline">\(O_p(1)\)</span>; the remaining <span class="math inline">\(m-r\)</span> vanish.</p>
+</div>
+<div class="fragment">
+<p><strong><span class="math inline">\(r = m\)</span> (<span class="math inline">\(x_t\)</span> already stationary).</strong> All <span class="math inline">\(\widehat\lambda_i\)</span> are <span class="math inline">\(O_p(1)\)</span>.</p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(\Longrightarrow\)</span> <strong># of non-vanishing eigenvalues = cointegrating rank.</strong></p>
+<p>At finite <span class="math inline">\(T\)</span>, sampling noise keeps every <span class="math inline">\(\widehat\lambda_i &gt; 0\)</span> — the rank tests formalize “how large is large enough.”</p>
+</div>
+</section>
+<section id="from-eigenvalues-to-a-test" class="slide level2 center">
+<h2>From Eigenvalues to a Test</h2>
+<p>In population, the rank dictionary cleanly separates non-vanishing from vanishing eigenvalues. At finite <span class="math inline">\(T\)</span>, sampling noise keeps every <span class="math inline">\(\widehat\lambda_i &gt; 0\)</span> — we need a <strong>hypothesis test</strong>.</p>
+<div class="fragment">
+<p><strong>Hypothesis.</strong> For each candidate <span class="math inline">\(r\)</span>, <span class="math display">\[
+H_0:\mathrm{rank}(\Pi) \le r \quad\text{vs.}\quad H_1:\mathrm{rank}(\Pi) &gt; r.
+\]</span> Under <span class="math inline">\(H_0\)</span>: <span class="math inline">\(\widehat\lambda_{r+1}, \ldots, \widehat\lambda_m\)</span> should all vanish. Under <span class="math inline">\(H_1\)</span>: at least <span class="math inline">\(\widehat\lambda_{r+1}\)</span> remains <span class="math inline">\(O_p(1)\)</span>.</p>
+</div>
+<div class="fragment">
+<p><strong>Direct route.</strong> Reject if <span class="math inline">\(\widehat\lambda_{r+1}\)</span> is “too big.” Two gaps:</p>
+<ul>
+<li><em>cutoff</em> — what null distribution for raw <span class="math inline">\(\widehat\lambda\)</span>?</li>
+<li><em>combining info</em> — <span class="math inline">\(\widehat\lambda_{r+1}\)</span> alone, or all of <span class="math inline">\(\widehat\lambda_{r+1}, \ldots, \widehat\lambda_m\)</span>?</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>LR framework.</strong> Standard hypothesis-testing machinery — provides a null distribution and a principled way to aggregate across eigenvalues.</p>
+</div>
+</section>
+<section id="the-log-likelihood-ratio" class="slide level2 center">
+<h2>The Log-Likelihood Ratio</h2>
+<p>For nested models with maximized likelihoods <span class="math inline">\(L_0 \le L_1\)</span> (restricted vs. unrestricted), <span class="math display">\[
+\mathrm{LR} \;=\; -2\log\frac{L_0}{L_1} \;=\; -2(\ell_0 - \ell_1) \;\ge\; 0.
+\]</span></p>
+<p>Large <span class="math inline">\(\mathrm{LR}\)</span> → restricted model fits much worse → reject <span class="math inline">\(H_0\)</span>.</p>
+<div class="fragment">
+<p><strong>Wilks’ theorem</strong> (regular problems): under <span class="math inline">\(H_0\)</span>, <span class="math display">\[
+\mathrm{LR} \;\xrightarrow{d}\; \chi^2_q, \qquad q = \#\,\text{restrictions}.
+\]</span></p>
+</div>
+<div class="fragment">
+<p><strong>Johansen’s case is nonstandard.</strong> Because <span class="math inline">\(x_t\)</span> is <span class="math inline">\(I(1)\)</span>, the limit is a functional of Brownian motion, not <span class="math inline">\(\chi^2\)</span>. Critical values are tabulated (Osterwald-Lenum 1992; MacKinnon–Haug–Michelis 1999).</p>
+</div>
+</section>
+<section id="johansens-lr-rank-test" class="slide level2 center">
+<h2>Johansen’s LR Rank Test</h2>
+<p>For each <span class="math inline">\(r\)</span>, test <span class="math inline">\(H_0:\mathrm{rank}(\Pi)\le r\)</span> vs. <span class="math inline">\(H_1:\mathrm{rank}(\Pi) &gt; r\)</span>. Substituting the profile log-likelihood <span class="math inline">\(\ell(\Pi) = -\tfrac{T}{2}\log|\widehat\Sigma_u(\Pi)| + \text{const}\)</span>, <span class="math display">\[
+\mathrm{LR}(r) \;=\; -2(\ell_r - \ell_m) \;=\; -T\log\frac{|\widehat\Sigma_m|}{|\widehat\Sigma_r|},
+\]</span> where <span class="math inline">\(\widehat\Sigma_m, \widehat\Sigma_r\)</span> are the residual covariances under the unrestricted and rank-<span class="math inline">\(r\)</span> models.</p>
+</section>
+<section id="lr-in-eigenvalue-form" class="slide level2 center">
+<h2>LR in Eigenvalue Form</h2>
+<p>The determinant ratio reduces to a product over the Johansen eigenvalues: <span class="math display">\[
+\frac{|\widehat\Sigma_m|}{|\widehat\Sigma_r|} \;=\; \prod_{i=r+1}^m (1 - \widehat\lambda_i),
+\qquad
+\mathrm{LR}(r) \;=\; -T\sum_{i=r+1}^m \log(1 - \widehat\lambda_i).
 \]</span></p>
 <p>Two tests are built from this: the <strong>trace test</strong> and the <strong>maximum eigenvalue test</strong>.</p>
 </section>
@@ -1991,40 +2047,95 @@ H_1:\ \mathrm{rank}(\Pi)=r+1.
 <p><strong>Sequential use.</strong> Starting from <span class="math inline">\(r=0\)</span>: test, and if rejected, increment <span class="math inline">\(r\)</span> and test again. The selected rank is the first <span class="math inline">\(r\)</span> for which <span class="math inline">\(H_0\)</span> is <strong>not</strong> rejected.</p>
 </div>
 </section>
+<section id="connecting-back-to-the-eigenvalue-magnitude" class="slide level2 center">
+<h2>Connecting Back to the Eigenvalue Magnitude</h2>
+<p>For small <span class="math inline">\(\widehat\lambda_i\)</span> (the relevant range under the null of <em>no further</em> cointegration), Taylor expansion gives <span class="math display">\[
+-\log(1-\widehat\lambda_i) \;=\; \widehat\lambda_i + \tfrac{1}{2}\widehat\lambda_i^2 + O(\widehat\lambda_i^3).
+\]</span></p>
+<div class="fragment">
+<p>Both Johansen statistics reduce to magnitude-based forms:</p>
+<ul>
+<li><strong>Trace:</strong> <span class="math inline">\(\mathrm{LR}_{\text{trace}}(r) \;\approx\; T\sum_{i=r+1}^m \widehat\lambda_i\)</span>.</li>
+<li><strong>Max-eigenvalue:</strong> <span class="math inline">\(\mathrm{LR}_{\max}(r) \;\approx\; T\,\widehat\lambda_{r+1}\)</span>.</li>
+</ul>
+</div>
+<div class="fragment">
+<p>The “log” was never a separate strategy — it is the <strong>likelihood-correct version</strong> of “look at the eigenvalues.” The intuition built up earlier <em>is</em> what the test ultimately uses.</p>
+</div>
+</section>
 <section id="trace-vs.-max-eigen-practical-guidance" class="slide level2 center">
 <h2>Trace vs. Max-Eigen: Practical Guidance</h2>
-<p><strong>Trace test:</strong> <em>“Is there evidence for any additional long-run relations beyond <span class="math inline">\(r\)</span>?”</em></p>
-<p>→ joint test, often selects <strong>larger <span class="math inline">\(r\)</span></strong></p>
-<p><strong>Max-eigen test:</strong> <em>“Is there evidence for exactly one more relation?”</em></p>
-<p>→ sequential, easier to interpret step-by-step, often selects <strong>smaller <span class="math inline">\(r\)</span></strong></p>
+<p><strong>Why they differ.</strong></p>
+<ul>
+<li><em>Trace</em> sums contributions across <span class="math inline">\(\widehat\lambda_{r+1}, \dots, \widehat\lambda_m\)</span> — diffuse evidence across many small eigenvalues accumulates → tends to pick <strong>larger</strong> <span class="math inline">\(r\)</span>.</li>
+<li><em>Max-eigen</em> uses only <span class="math inline">\(\widehat\lambda_{r+1}\)</span> — needs one clearly large next eigenvalue → tends to pick <strong>smaller</strong> <span class="math inline">\(r\)</span>.</li>
+</ul>
+<div class="fragment">
+<p><strong>So what.</strong></p>
+<ul>
+<li>Trace has more power when several weak cointegrating relations are present.</li>
+<li>Max-eigen has more power against one strong relation and is easier to interpret step-by-step.</li>
+<li>In small samples, trace over-rejects more.</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>What to do.</strong></p>
+<ul>
+<li>Report both.</li>
+<li>If they agree → done.</li>
+<li>If they disagree → prefer max-eigen (more conservative), and probe robustness via lag length and deterministic specification.</li>
+</ul>
+</div>
 </section>
 <section id="englegranger-vs.-johansen" class="slide level2 center">
 <h2>Engle–Granger vs. Johansen</h2>
+<p>Both estimate <span class="math inline">\(\beta\)</span> identified only up to rotation. The difference is <em>when</em> the normalization enters.</p>
 <p><strong>Engle–Granger</strong> (single-equation)</p>
 <ul>
 <li>OLS on <span class="math inline">\(y_t = \theta&#39; z_t + e_t\)</span>, then ECM with <span class="math inline">\(\widehat e_{t-1}\)</span></li>
-<li>natural when <span class="math inline">\(r=1\)</span> and you can pick a “dependent” variable</li>
-<li>cannot handle <span class="math inline">\(r &gt; 1\)</span>; sensitive to normalization</li>
+<li>normalization is <strong>baked into estimation</strong> — picking <span class="math inline">\(y\)</span> as LHS fixes its coefficient at <span class="math inline">\(1\)</span></li>
+<li>different LHS choices give different finite-sample <span class="math inline">\(\widehat\theta\)</span> (asymmetric)</li>
+<li>cannot handle <span class="math inline">\(r &gt; 1\)</span></li>
 </ul>
 <p><strong>Johansen</strong> (system VECM)</p>
 <ul>
 <li>system estimator for the cointegration space <span class="math inline">\(\mathrm{span}(\beta)\)</span></li>
-<li>handles multiple long-run relations (<span class="math inline">\(r = 0, 1, \dots, m-1\)</span>)</li>
-<li>likelihood-based rank tests (trace, max-eigen)</li>
-<li><span class="math inline">\(\beta\)</span> identified only up to rotation; normalization needed</li>
+<li>normalization is <strong>post-estimation</strong> — rotate eigenvectors after fitting; rank tests are invariant</li>
+<li>handles <span class="math inline">\(r = 0, 1, \dots, m-1\)</span>; LR rank tests built in</li>
 </ul>
 <div class="fragment">
 <p>Both require lag length <span class="math inline">\(p\)</span> and deterministic terms (constant/trend) to be specified up front.</p>
+</div>
+</section>
+<section id="from-rank-to-vecm-structure" class="slide level2 center">
+<h2>From Rank to VECM Structure</h2>
+<p>With <span class="math inline">\(r\)</span> fixed by the rank tests, both VECM components come from the eigenproblem: <span class="math display">\[
+\widehat\beta_r = \text{top-}r\ \text{eigenvectors (normalized: } \widehat\beta_r&#39;\,S_{11}\,\widehat\beta_r = I_r\text{)},
+\qquad
+\widehat\alpha_r = S_{01}\,\widehat\beta_r.
+\]</span></p>
+<p>The estimated VECM <span class="math display">\[
+\Delta x_t = \widehat\alpha\,\widehat\beta&#39;\,x_{t-1} + \cdots + u_t
+\]</span> has two structural objects to interrogate:</p>
+<ul>
+<li><span class="math inline">\(\beta\)</span> — long-run equilibrium relations,</li>
+<li><span class="math inline">\(\alpha\)</span> — adjustment coefficients (which variables respond to disequilibrium).</li>
+</ul>
+<div class="fragment">
+<p>Restrictions on either are testable hypotheses with economic content. We turn to <span class="math inline">\(\alpha\)</span> next — its restrictions read as statements about the <strong>error-correction role</strong> of each variable (e.g., “is variable <span class="math inline">\(i\)</span> weakly exogenous to the long-run equilibrium?”).</p>
 </div>
 </section>
 <section id="testing-adjustment-in-a-vecm-restrictions-on-alpha" class="slide level2 center">
 <h2>Testing Adjustment in a VECM: Restrictions on <span class="math inline">\(\alpha\)</span></h2>
 <p>In the VECM <span class="math display">\[
 \Delta x_t = \alpha\beta&#39; x_{t-1} + \cdots + u_t,
-\]</span> <span class="math inline">\(\alpha\in\mathbb{R}^{m\times r}\)</span> collects <strong>adjustment coefficients</strong>: row <span class="math inline">\(i\)</span> describes how <span class="math inline">\(\Delta x_{i,t}\)</span> responds to the <span class="math inline">\(r\)</span> equilibrium errors.</p>
-<p>Hypotheses about adjustment are typically written as <span class="math display">\[
-H_0:\ R\,\mathrm{vec}(\alpha)=q,
-\]</span> where <span class="math inline">\(R\)</span> selects or combines elements of <span class="math inline">\(\alpha\)</span>.</p>
+\]</span> <span class="math inline">\(\alpha \in \mathbb{R}^{m\times r}\)</span> collects <strong>adjustment coefficients</strong>: row <span class="math inline">\(i\)</span> describes how <span class="math inline">\(\Delta x_{i,t}\)</span> responds to the <span class="math inline">\(r\)</span> equilibrium errors.</p>
+<p>Linear hypotheses on <span class="math inline">\(\alpha\)</span> take the form <span class="math display">\[
+H_0:\ R\,\mathrm{vec}(\alpha) = q,
+\qquad
+R \in \mathbb{R}^{k \times mr},\ q \in \mathbb{R}^{k},
+\]</span> where <span class="math inline">\(\mathrm{vec}(\alpha) \in \mathbb{R}^{mr}\)</span> stacks the columns of <span class="math inline">\(\alpha\)</span>, and <span class="math inline">\(k\)</span> = # independent restrictions = degrees of freedom of the LR/Wald <span class="math inline">\(\chi^2\)</span> test.</p>
+<p>Conditional on the cointegration rank <span class="math inline">\(r\)</span>, <span class="math inline">\(\alpha\)</span> is the coefficient on the <strong>stationary</strong> regressor <span class="math inline">\(\widehat\beta_r&#39; x_{t-1},\)</span> so standard regression / MLE asymptotics apply.</p>
 </section>
 <section id="examples-of-restrictions-on-alpha" class="slide level2 center">
 <h2>Examples of Restrictions on <span class="math inline">\(\alpha\)</span></h2>
@@ -2035,44 +2146,38 @@ H_0:\ \alpha_{i\cdot}=0 \quad (r\ \text{restrictions})
 <li><p><strong>Only relation 1 adjusts variable <span class="math inline">\(i\)</span></strong>: <span class="math display">\[
 H_0:\ \alpha_{i2}=\cdots=\alpha_{ir}=0
 \]</span></p></li>
-<li><p><strong>Equal adjustment speeds across variables</strong> (example): <span class="math display">\[
-H_0:\ \alpha_{1\cdot}=\alpha_{2\cdot}
+<li><p><strong>Same adjustment for variables <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span></strong>: <span class="math display">\[
+H_0:\ \alpha_{i\cdot}=\alpha_{j\cdot}
 \]</span></p></li>
-</ul>
-</section>
-<section id="inference-on-alpha" class="slide level2 center">
-<h2>Inference on <span class="math inline">\(\alpha\)</span></h2>
-<p>Under standard VECM regularity conditions (given the cointegration rank <span class="math inline">\(r\)</span>):</p>
-<ul>
-<li>LR / Wald / LM tests for linear restrictions on <span class="math inline">\(\alpha\)</span></li>
-<li>asymptotic <span class="math inline">\(\chi^2\)</span> distribution (df = number of restrictions)</li>
-<li>implemented in standard VECM software</li>
 </ul>
 </section>
 <section id="example-a-small-open-economy" class="slide level2 center">
 <h2>Example: A Small Open Economy</h2>
-<p>Consider a small open economy with <span class="math display">\[
-x_t =
+<p><span class="math inline">\(x_t = (y_t,\ p_t,\ p_t^{\ast})&#39;\)</span> — domestic output, domestic price, foreign price.</p>
+<p><strong>Question.</strong> Do prices satisfy PPP in the long run, and which side adjusts to disequilibrium — domestic or foreign?</p>
+<div class="fragment">
+<p><strong>Procedure.</strong></p>
+<ol type="1">
+<li>Johansen rank tests → estimate <span class="math inline">\(\widehat r\)</span>.</li>
+<li>Recover <span class="math inline">\(\widehat\beta\)</span> from the top eigenvector(s).</li>
+<li>LR test whether <span class="math inline">\(\widehat\beta\)</span> matches the PPP form <span class="math inline">\((0,1,-1)&#39;\)</span>.</li>
+<li>Test restrictions on <span class="math inline">\(\alpha\)</span> for adjustment dynamics.</li>
+</ol>
+</div>
+<div class="fragment">
+<p>Suppose stages 1–3 deliver <span class="math inline">\(\widehat r = 1\)</span> and <span class="math inline">\(\widehat\beta \approx (0,1,-1)&#39;\)</span>. The VECM components: <span class="math display">\[
+\beta = \begin{bmatrix} 0 \\ 1 \\ -1 \end{bmatrix},
+\quad
+\alpha = \begin{bmatrix} \alpha_y \\ \alpha_p \\ \alpha_{p^\ast} \end{bmatrix},
+\quad
+\Pi = \alpha\beta&#39; =
 \begin{bmatrix}
-y_t \\ p_t \\ p_t^{\ast}
-\end{bmatrix},
-\]</span> where <span class="math inline">\(y_t\)</span> is domestic output, <span class="math inline">\(p_t\)</span> is the domestic price level, and <span class="math inline">\(p_t^{\ast}\)</span> is the foreign price level.</p>
-<p>Suppose theory suggests a PPP-type long-run relation: <span class="math display">\[
-\beta&#39; x_t = p_t - p_t^{\ast}
-\quad \text{is stationary}.
-\]</span></p>
-<p>Then the VECM implies <span class="math display">\[
-\Delta x_t
-=
-\alpha (p_{t-1}-p_{t-1}^{\ast})
-+\sum_{i=1}^{p-1}\Gamma_i \Delta x_{t-i}
-+u_t,
-\qquad
-\alpha =
-\begin{bmatrix}
-\alpha_y\\ \alpha_p\\ \alpha_{p^\ast}
+0 &amp; \alpha_y &amp; -\alpha_y \\
+0 &amp; \alpha_p &amp; -\alpha_p \\
+0 &amp; \alpha_{p^\ast} &amp; -\alpha_{p^\ast}
 \end{bmatrix}.
 \]</span></p>
+</div>
 </section>
 <section id="small-open-economy-a-meaningful-restriction" class="slide level2 center">
 <h2>Small Open Economy: A Meaningful Restriction</h2>
