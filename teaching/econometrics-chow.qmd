@@ -16,3 +16,4 @@ title: "Econometrics (Chow)"
 - [Lecture 4c: Model Selection & Controls](/files/teaching/econometrics-chow/lect4c_model_selection_controls.html)
 - [Lecture 5a: IV — Motivation](/files/teaching/econometrics-chow/lect5a_iv_motivation.html)
 - [Lecture 5b: IV — Estimation](/files/teaching/econometrics-chow/lect5b_iv_estimation.html)
+- [Lecture 6a: Panel Regression](/files/teaching/econometrics-chow/lect6a_panel_regression.html)
