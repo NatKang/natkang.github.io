@@ -17,3 +17,4 @@ title: "Econometrics (Chow)"
 - [Lecture 5a: IV — Motivation](/files/teaching/econometrics-chow/lect5a_iv_motivation.html)
 - [Lecture 5b: IV — Estimation](/files/teaching/econometrics-chow/lect5b_iv_estimation.html)
 - [Lecture 6a: Panel Regression](/files/teaching/econometrics-chow/lect6a_panel_regression.html)
+- [Lecture 6b: Difference-in-Differences](/files/teaching/econometrics-chow/lect6b_did.html)
