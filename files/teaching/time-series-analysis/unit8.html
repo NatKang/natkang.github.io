@@ -2192,6 +2192,37 @@ v_{12}/\sqrt{v_{11}} &amp; \sqrt{v_{22} - v_{12}^2/v_{11}}
 </ul>
 </div>
 </section>
+<section id="proxy-svar-standard-iv-concerns" class="slide level2 center">
+<h2>Proxy SVAR: Standard IV Concerns</h2>
+<p>Proxy SVAR uses an external <span class="math inline">\(z_t\)</span> to identify one shock — but the identification rests on standard IV conditions.</p>
+<div class="fragment">
+<p><strong>Exogeneity is plausible, not testable</strong></p>
+<ul>
+<li><span class="math inline">\(\mathbb{E}[z_t\,\varepsilon_{jt}] = 0\)</span> for <span class="math inline">\(j \neq 1\)</span> cannot be checked directly — a general IV concern.</li>
+<li>Concrete worry for FF4: the <em>Fed information effect</em> — surprises may release the Fed’s private information about the economy, not pure policy stance (Nakamura–Steinsson, 2018).</li>
+<li>If so, <span class="math inline">\(z_t\)</span> is correlated with non-policy shocks; identification breaks.</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Weak-instrument risk</strong> (relevance)</p>
+<ul>
+<li>Relevance only requires <span class="math inline">\(\mathbb{E}[z_t\,\varepsilon_{1t}] \neq 0\)</span> — the correlation can be arbitrarily small.</li>
+<li>In practice, <span class="math inline">\(z_t\)</span> may explain little of <span class="math inline">\(u_t\)</span>; first-stage <span class="math inline">\(F &lt; 10\)</span> is common, and the identified <span class="math inline">\(b\)</span> has large standard errors.</li>
+</ul>
+</div>
+</section>
+<section id="proxy-svar-what-shock-do-we-identify" class="slide level2 center">
+<h2>Proxy SVAR: What Shock Do We Identify?</h2>
+<p>Even when exogeneity and relevance hold, the instrument identifies the response to a <em>specific type</em> of shock — not a generic one.</p>
+<div class="fragment">
+<p><strong>LATE-style heterogeneity</strong></p>
+<ul>
+<li>The identified IRF reflects only the component of <span class="math inline">\(\varepsilon_{1t}\)</span> that is correlated with <span class="math inline">\(z_t\)</span>.</li>
+<li>FF4 surprises capture FOMC-window news; slow-moving policy shifts (gradual forward guidance, off-meeting balance-sheet operations) produce no FF4 surprise and so don’t enter the identified IRF.</li>
+<li>The IRF is <em>local</em> to the variation <span class="math inline">\(z_t\)</span> captures — analogous to LATE in cross-sectional IV.</li>
+</ul>
+</div>
+</section>
 <section id="summary-of-identification-schemes" class="slide level2 center">
 <h2>Summary of Identification Schemes</h2>
 <table class="caption-top">
@@ -2238,6 +2269,115 @@ v_{12}/\sqrt{v_{11}} &amp; \sqrt{v_{22} - v_{12}^2/v_{11}}
 </table>
 <div class="fragment">
 <p>None of these is “the right” scheme. Each makes economic content explicit. Choosing among them is a <strong>modeling decision</strong>, not a statistical one.</p>
+</div>
+</section>
+<section id="standard-svar-and-the-cl-structure" class="slide level2 center">
+<h2>Standard SVAR and the <span class="math inline">\(C(L)\)</span> Structure</h2>
+<p>The general relationship between reduced-form innovations and structural shocks: <span class="math display">\[
+u_t \;=\; C(L)\,\varepsilon_t.
+\]</span></p>
+<p>Standard SVAR is the <em>special case</em> <span class="math inline">\(C(L) = B\)</span> (constant matrix). Identify <span class="math inline">\(B\)</span> from <span class="math inline">\(\Sigma_u\)</span> <span class="math inline">\(+\)</span> restrictions, recover <span class="math inline">\(\varepsilon_t = B^{-1} u_t\)</span>.</p>
+<div class="fragment">
+<p><strong>If <span class="math inline">\(C(L)\)</span> has lags but is invertible:</strong> the VAR’s <span class="math inline">\(\Phi(L)\)</span> (with enough lags) absorbs the lag structure, leaving <span class="math inline">\(u_t = B\,\varepsilon_t\)</span> in the limit. Standard SVAR still works.</p>
+</div>
+<div class="fragment">
+<p><strong>If <span class="math inline">\(C(L)\)</span> is non-invertible:</strong> no VAR — finite or infinite order — can recover <span class="math inline">\(\varepsilon_t\)</span> from past <span class="math inline">\(u\)</span>’s. This is <strong>non-fundamentality</strong>.</p>
+<p>The canonical source of non-invertible <span class="math inline">\(C(L)\)</span>: <strong>anticipation</strong>.</p>
+</div>
+</section>
+<section id="cl-and-the-structural-ma-ml" class="slide level2 center">
+<h2><span class="math inline">\(C(L)\)</span> and the Structural MA <span class="math inline">\(M(L)\)</span></h2>
+<p>From <span class="math inline">\(\Phi(L)\,y_t = C(L)\,\varepsilon_t\)</span>, the structural MA of observables is <span class="math display">\[
+y_t = M(L)\,\varepsilon_t, \qquad C(L) = \Phi(L)\,M(L).
+\]</span></p>
+<div class="fragment">
+<ul>
+<li>Determinant rule: <span class="math inline">\(\det C(z) = \det\Phi(z) \cdot \det M(z)\)</span>.</li>
+<li>Stationarity: <span class="math inline">\(\det\Phi(z)\)</span> has no inside-disk roots.</li>
+<li><span class="math inline">\(\Rightarrow\)</span> inside-disk roots of <span class="math inline">\(\det C(z)\)</span> are exactly those of <span class="math inline">\(\det M(z)\)</span>.</li>
+</ul>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(\Rightarrow\)</span> checking <span class="math inline">\(C(L)\)</span> non-invertibility reduces to checking <span class="math inline">\(\det M(z)\)</span> for inside-disk roots. The next slide does this in a GE model.</p>
+</div>
+</section>
+<section id="lwy-2013-setup" class="slide level2 center">
+<h2>LWY (2013): Setup</h2>
+<p>Neoclassical growth model with <span class="math inline">\(q\)</span>-period tax foresight.</p>
+<p><strong>Model ingredients</strong></p>
+<ul>
+<li>Preferences: log utility, discount factor <span class="math inline">\(\beta \in (0,1)\)</span>.</li>
+<li>Production: <span class="math inline">\(A_t K_{t-1}^\alpha\)</span> (capital share <span class="math inline">\(\alpha \in (0,1)\)</span>, full depreciation, inelastic labor).</li>
+<li>Government: distortionary tax at rate <span class="math inline">\(\tau_t\)</span> (steady-state level <span class="math inline">\(\tau\)</span>), rebated lump-sum.</li>
+</ul>
+<p><strong>Observables</strong></p>
+<ul>
+<li><span class="math inline">\(a_t\)</span> — log TFP.</li>
+<li><span class="math inline">\(\hat K_t\)</span> — log capital deviation from steady state.</li>
+</ul>
+<p><strong>Structural shocks</strong></p>
+<ul>
+<li><span class="math inline">\(\varepsilon^A_t\)</span> — TFP innovation.</li>
+<li><span class="math inline">\(\varepsilon^\tau_t\)</span> — tax news at <span class="math inline">\(t\)</span>, announces <span class="math inline">\(\hat\tau_{t+q}\)</span>.</li>
+</ul>
+</section>
+<section id="lwy-2013-equilibrium-ml" class="slide level2 center">
+<h2>LWY (2013): Equilibrium <span class="math inline">\(M(L)\)</span></h2>
+<p>Solving the equilibrium (log utility, full depreciation, Cobb–Douglas production) gives, for <span class="math inline">\(q = 2\)</span>: <span class="math display">\[
+M(L) \;=\;
+\begin{pmatrix}
+   1 &amp; 0 \\
+   \dfrac{1}{1 - \alpha L}
+   &amp; -\dfrac{\kappa(L + \theta)}{1 - \alpha L}
+\end{pmatrix},
+\]</span> with <span class="math inline">\(\theta = \alpha\beta(1-\tau) \in (0,1)\)</span> and <span class="math inline">\(\kappa = (1-\theta)\tau/(1-\tau)\)</span>.</p>
+<div class="fragment">
+<ul>
+<li>Row 1 (TFP): exogenous to taxes, responds 1-to-1 to its own shock.</li>
+<li>Row 2 (capital):
+<ul>
+<li>TFP: AR dynamics <span class="math inline">\((1-\alpha L)^{-1}\)</span>.</li>
+<li>tax news: numerator <span class="math inline">\(-\kappa(L+\theta)\)</span> (impact <span class="math inline">\(-\kappa\theta\)</span>, <span class="math inline">\(L^1\)</span> coefficient <span class="math inline">\(-\kappa\)</span>), AR filter <span class="math inline">\((1-\alpha L)^{-1}\)</span>.</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="lwy-2013-non-invertibility" class="slide level2 center">
+<h2>LWY (2013): Non-Invertibility</h2>
+<p>Determinant: <span class="math display">\[
+\det M(z) \;=\; -\frac{\kappa(z+\theta)}{1-\alpha z},
+\qquad \text{root at } z = -\theta.
+\]</span></p>
+<p>Since <span class="math inline">\(\theta = \alpha\beta(1-\tau) \in (0,1)\)</span>, the root sits inside the unit disk. <span class="math inline">\(M(L)\)</span> non-invertible <span class="math inline">\(\Rightarrow C(L)\)</span> non-invertible <span class="math inline">\(\Rightarrow\)</span> standard SVAR fails.</p>
+<div class="fragment">
+<p><strong>Economic intuition.</strong></p>
+<ul>
+<li>Coefficient on current news in today’s capital is <span class="math inline">\(-\kappa\theta\)</span> (from row 2 of <span class="math inline">\(M_0\)</span>).</li>
+<li>Larger <span class="math inline">\(\theta\)</span> <span class="math inline">\(\Rightarrow\)</span> larger response of capital to current news <span class="math inline">\(\Rightarrow\)</span> news more visible in today’s data <span class="math inline">\(\Rightarrow\)</span> closer to invertibility.</li>
+<li>Smaller <span class="math inline">\(\theta\)</span> <span class="math inline">\(\Rightarrow\)</span> news barely affects today’s capital <span class="math inline">\(\Rightarrow\)</span> news invisible until tax change at <span class="math inline">\(t+q\)</span> <span class="math inline">\(\Rightarrow\)</span> severe non-invertibility.</li>
+<li>Standard parameters (<span class="math inline">\(\alpha \approx 0.3\)</span>, <span class="math inline">\(\beta \approx 0.99\)</span>, <span class="math inline">\(\tau \approx 0.25\)</span>): <span class="math inline">\(\theta \approx 0.22\)</span>, well inside disk.</li>
+</ul>
+</div>
+</section>
+<section id="proxy-svar-impact-response" class="slide level2 center">
+<h2>Proxy SVAR: Impact Response</h2>
+<p>Suppose we have an external instrument <span class="math inline">\(z_t\)</span> with</p>
+<ul>
+<li><em>Relevance</em>: <span class="math inline">\(\mathrm{Cov}(z_t,\,\varepsilon^\tau_t) \neq 0\)</span>.</li>
+<li><em>Exogeneity to other current shocks</em>: <span class="math inline">\(\mathrm{Cov}(z_t,\,\varepsilon^A_t) = 0\)</span>.</li>
+<li><em>Exogeneity to past shocks</em>: <span class="math inline">\(\mathrm{Cov}(z_t,\,\varepsilon_{s}) = 0\)</span> for all <span class="math inline">\(s &lt; t\)</span>.</li>
+</ul>
+<div class="fragment">
+<p><strong>Impact response.</strong> Under non-invertibility, <span class="math inline">\(u_t = C(L)\,\varepsilon_t = \sum_{j \geq 0} C_j\,\varepsilon_{t-j}\)</span>. Then <span class="math display">\[\begin{align*}
+\mathrm{Cov}(u_t,\, z_t)
+   &amp;= \sum_{j \geq 0} C_j\,\mathrm{Cov}(\varepsilon_{t-j},\, z_t) \\
+   &amp;= C_0\,\mathrm{Cov}(\varepsilon_t,\, z_t)
+        \quad\text{(past-shock terms zero)} \\
+   &amp;= (C_0)_{\bullet,\tau} \cdot \mathrm{Cov}(z_t,\,\varepsilon^\tau_t).
+\end{align*}\]</span> Since <span class="math inline">\(C_0 = \Phi(0)\,M_0 = M_0\)</span>, this recovers <span class="math inline">\((M_0)_{\bullet,\tau}\)</span> — the impact column (<span class="math inline">\(h = 0\)</span> of the IRF).</p>
+</div>
+<div class="fragment">
+<p><strong>Full IRF.</strong> For later horizons, use local-projection IV (LP-IV).</p>
 </div>
 </section>
 <section id="practical-guidance" class="slide level2 center">
