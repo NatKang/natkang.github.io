@@ -1903,15 +1903,37 @@ S_{10}S_{00}^{-1}S_{01}\,v = \lambda\,S_{11}\,v.
 <aside><div>
 <p>Full derivation: §6 of <code>unit7_johansen_derivation.pdf</code>.</p>
 </div></aside></section>
+<section id="cca-in-variational-form" class="slide level2 center">
+<h2>CCA in Variational Form</h2>
+<p>The remark just said <span class="math inline">\(\widehat\lambda_i = \widehat\rho_i^{\,2}\)</span> — eigenvalues <em>are</em> squared canonical correlations. Make this operational.</p>
+<div class="fragment">
+<p><strong>Canonical direction vectors.</strong> Pick <span class="math inline">\(a,\,b \in \mathbb{R}^m\)</span> to form scalar series <span class="math display">\[
+a&#39; R_{0t}\ \text{(combined residual differences)},
+\qquad
+b&#39; R_{1t}\ \text{(combined residual levels)}.
+\]</span></p>
+</div>
+<div class="fragment">
+<p><strong>Variational identity.</strong> <span class="math display">\[
+\widehat\lambda_i
+\;=\;
+\max_{a,\,b}\;\widehat{\mathrm{corr}}^{\,2}\!\bigl(a&#39; R_{0t},\, b&#39; R_{1t}\bigr)
+\;=\;
+\max_{a,\,b}\;\frac{(a&#39;S_{01}\,b)^2}{(a&#39;S_{00}\,a)\,(b&#39;S_{11}\,b)}.
+\]</span> For <span class="math inline">\(i&gt;1\)</span>, the max is taken orthogonal to previous pairs (CCA deflation).</p>
+</div>
+</section>
 <section id="what-does-a-large-widehatlambda_i-mean" class="slide level2 center">
 <h2>What Does a Large <span class="math inline">\(\widehat\lambda_i\)</span> Mean?</h2>
-<p>CCA reads <span class="math inline">\(\widehat\lambda_i\)</span> off <strong>sample moments</strong>, not single-time covariances: <span class="math display">\[
-\widehat\lambda_i \;=\; \max_{a,\,b}\;\frac{(a&#39;S_{01}\,b)^2}{(a&#39;S_{00}\,a)\,(b&#39;S_{11}\,b)},
+<div class="fragment">
+<p><strong>Fix a direction <span class="math inline">\(b\)</span> with <span class="math inline">\(b&#39;R_{1t}\sim I(1)\)</span>.</strong> (<span class="math inline">\(R_{0t}\sim I(0)\)</span> always.) What does the squared sample correlation along <span class="math inline">\((a, b)\)</span> converge to? <span class="math display">\[
+\frac{(a&#39;S_{01}\,b)^2}{(a&#39;S_{00}\,a)\,(b&#39;S_{11}\,b)},
 \qquad
 S_{ij} = \tfrac{1}{T}\!\sum_{t} R_{it} R_{jt}&#39;.
 \]</span></p>
+</div>
 <div class="fragment">
-<p><strong>Three asymptotic rates.</strong> With <span class="math inline">\(R_{0t} \sim I(0)\)</span> and <span class="math inline">\(b&#39;R_{1t} \sim I(1)\)</span>:</p>
+<p><strong>Three asymptotic rates.</strong></p>
 <ul>
 <li><span class="math inline">\(a&#39; S_{00}\, a \;\xrightarrow{p}\; a&#39;\Sigma_{00}\,a \;=\; O_p(1)\)</span>   (<span class="math inline">\(I(0)\times I(0)\)</span>)</li>
 <li><span class="math inline">\(b&#39; S_{11}\, b \;=\; O_p(T)\)</span>   (<span class="math inline">\(I(1)\times I(1)\)</span>: <span class="math inline">\(\mathrm{Var}(b&#39;R_{1t}) = O(t)\)</span>, sample average inflates as <span class="math inline">\(T\)</span>)</li>
@@ -1919,9 +1941,9 @@ S_{ij} = \tfrac{1}{T}\!\sum_{t} R_{it} R_{jt}&#39;.
 </ul>
 </div>
 <div class="fragment">
-<p><strong>Putting them together:</strong> <span class="math display">\[
-\widehat\lambda_i \;=\; \frac{O_p(1)}{O_p(1)\cdot O_p(T)} \;=\; O_p(T^{-1}) \;\xrightarrow{p}\; 0.
-\]</span> The correlation washes out asymptotically — <em>unless</em> there is a special direction.</p>
+<p><strong>Ratio collapses:</strong> <span class="math display">\[
+\frac{O_p(1)}{O_p(1)\cdot O_p(T)} \;=\; O_p(T^{-1}) \;\xrightarrow{p}\; 0.
+\]</span> Any <span class="math inline">\(I(1)\)</span>-direction washes out. So <span class="math inline">\(\widehat\lambda_i = \max_{a,b}(\cdot)\)</span> can stay bounded above 0 <em>only if</em> some <span class="math inline">\(b\)</span> gives <span class="math inline">\(b&#39;R_{1t}\sim I(0)\)</span>.</p>
 </div>
 </section>
 <section id="cointegration-as-the-escape-hatch" class="slide level2 center">
