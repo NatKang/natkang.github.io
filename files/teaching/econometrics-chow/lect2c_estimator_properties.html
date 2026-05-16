@@ -1079,7 +1079,7 @@ Natasha Kang
     </div>
 </div>
 
-  <p class="date">March, 2026</p>
+  <p class="date">May, 2026</p>
 </section>
 <section id="estimators-vs.-estimates" class="slide level2 center">
 <h2>Estimators vs. Estimates</h2>
@@ -1101,7 +1101,9 @@ Natasha Kang
 <section id="the-gauss-markov-assumptions-slr" class="slide level2 center">
 <h2>The Gauss-Markov Assumptions: SLR</h2>
 <ol type="1">
-<li class="fragment"><strong>SLR.1 — Linear in Parameters</strong>: <span class="math inline">\(Y = \beta_0 + \beta_1 X + U\)</span></li>
+<li><strong>SLR.1 — Linear in Parameters</strong>: <span class="math inline">\(Y = \beta_0 + \beta_1 X + U\)</span></li>
+</ol>
+<ol start="2" type="1">
 <li class="fragment"><strong>SLR.2 — Random Sampling</strong>: <span class="math inline">\(\{(X_i, Y_i) : i = 1, \ldots, n\}\)</span> are i.i.d.</li>
 <li class="fragment"><strong>SLR.3 — Variation in <span class="math inline">\(X\)</span></strong>: the sample values of <span class="math inline">\(X\)</span> are not all equal</li>
 <li class="fragment"><strong>SLR.4 — Zero Conditional Mean</strong>: <span class="math inline">\(E[U \mid X] = 0\)</span></li>
@@ -1246,7 +1248,9 @@ E[\hat\beta_0] = \beta_0, \qquad E[\hat\beta_1] = \beta_1
 <section id="gauss-markov-assumptions-mlr" class="slide level2 center">
 <h2>Gauss-Markov Assumptions: MLR</h2>
 <ol type="1">
-<li class="fragment"><strong>MLR.1 — Linear in Parameters</strong>: <span class="math inline">\(Y = \beta_0 + \beta_1 X_1 + \cdots + \beta_k X_k + U\)</span></li>
+<li><strong>MLR.1 — Linear in Parameters</strong>: <span class="math inline">\(Y = \beta_0 + \beta_1 X_1 + \cdots + \beta_k X_k + U\)</span></li>
+</ol>
+<ol start="2" type="1">
 <li class="fragment"><strong>MLR.2 — Random Sampling</strong>: <span class="math inline">\(\{(X_{i1}, \ldots, X_{ik}, Y_i) : i = 1, \ldots, n\}\)</span> are i.i.d.</li>
 <li class="fragment"><strong>MLR.3 — No Perfect Collinearity</strong>: no exact linear relationships among the regressors</li>
 <li class="fragment"><strong>MLR.4 — Zero Conditional Mean</strong>: <span class="math inline">\(E[U \mid X_1, \ldots, X_k] = 0\)</span></li>
@@ -1461,7 +1465,7 @@ E[\tilde\beta_1 \mid X] = \beta_1 + \underbrace{\beta_2 \tilde\delta_1}_{\text{O
 \]</span></p>
 <ul>
 <li>Biased whenever <span class="math inline">\(\beta_2 \neq 0\)</span> <strong>and</strong> <span class="math inline">\(\tilde\delta_1 \neq 0\)</span>.</li>
-<li>Note: this is conditional on <span class="math inline">\(X\)</span>. The unconditional bias is <span class="math inline">\(\beta_2 \, E[\tilde\delta_1] = \beta_2 \delta_1\)</span>, where <span class="math inline">\(\delta_1\)</span> is the population regression coefficient of <span class="math inline">\(X_2\)</span> on <span class="math inline">\(X_1\)</span>.</li>
+<li>Note: this is conditional on <span class="math inline">\(X\)</span>; <span class="math inline">\(\tilde\delta_1\)</span> is the <em>sample</em> slope of <span class="math inline">\(X_2\)</span> on <span class="math inline">\(X_1\)</span>. The large-sample version follows directly from <span class="math inline">\(\text{plim}\,\tilde\beta_1 = \text{Cov}(X_1,Y)/\text{Var}(X_1)\)</span>: under the true model, <span class="math inline">\(\text{plim}\,\tilde\beta_1 = \beta_1 + \beta_2\,\delta_1\)</span>, where <span class="math inline">\(\delta_1 \equiv \text{Cov}(X_1,X_2)/\text{Var}(X_1)\)</span>.</li>
 </ul>
 </div>
 </section>
