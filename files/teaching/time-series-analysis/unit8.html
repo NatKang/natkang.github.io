@@ -572,10 +572,7 @@ max-height: 60vh;
 height: auto;
 }
 
-.reveal .slides {
-max-width: 1200px;
-margin: auto;
-}
+
 
 
 
@@ -1202,6 +1199,7 @@ x_t = c + A_1 x_{t-1} + \cdots + A_p x_{t-p} + u_t,
 <li>moves <em>on its own</em></li>
 <li>not a response to other variables in the model</li>
 </ul>
+<p>Equivalently, a shock is a <strong>surprise</strong> — the part of a variable unpredictable from the <strong>information set of the agents</strong> in the model.</p>
 <div class="fragment">
 <p>Two shocks are, by construction, <strong>mutually uncorrelated</strong>. If two candidates co-move systematically, neither is primitive — something behind both is the real cause.</p>
 </div>
@@ -1218,7 +1216,7 @@ x_t = c + A_1 x_{t-1} + \cdots + A_p x_{t-p} + u_t,
 <p><span class="math display">\[
 u_t = x_t - \mathbb{E}(x_t \mid x_{t-1}, x_{t-2}, \ldots).
 \]</span></p>
-<p>It is “today’s <span class="math inline">\(x_t\)</span> minus its forecast from the past.” Nothing about that definition makes the <em>components</em> of <span class="math inline">\(u_t\)</span> causally distinct.</p>
+<p>It is “today’s <span class="math inline">\(x_t\)</span> minus its forecast from the past” — itself a <strong>surprise</strong>, but relative to the <strong>econometrician’s information set</strong>: the history of the observed series. Nothing about that definition makes the <em>components</em> of <span class="math inline">\(u_t\)</span> causally distinct.</p>
 <div class="fragment">
 <p>The relationship to structural shocks is</p>
 <p><span class="math display">\[
@@ -1951,13 +1949,12 @@ v_{12}/\sqrt{v_{11}} &amp; \sqrt{v_{22} - v_{12}^2/v_{11}}
 </section>
 <section id="long-run-neutrality" class="slide level2 center">
 <h2>Long-Run Neutrality</h2>
-<div class="fragment">
-<p><strong>Output (<span class="math inline">\(Y_t\)</span>).</strong> Long-run output is determined by supply-side fundamentals — capital, labor, productivity. Quantity theory: <span class="math display">\[MV = PY, \qquad Y \to Y^* \;\Longrightarrow\; \Delta M \to \Delta P.\]</span></p>
+<p><strong>Output (<span class="math inline">\(Y_t\)</span>).</strong> Long-run output is determined by supply-side fundamentals — capital, labor, productivity. Quantity theory:</p>
+<p><span class="math display">\[MV = PY, \qquad Y \to Y^* \;\Longrightarrow\; \Delta M \to \Delta P.\]</span></p>
 <ul>
 <li><em>Demand</em> (movements in <span class="math inline">\(M\)</span>): nominal effect only — <span class="math inline">\(\Delta P\)</span>, not <span class="math inline">\(\Delta Y\)</span>. <strong>Long-run neutral on output.</strong></li>
 <li><em>Supply</em>: shifts <span class="math inline">\(Y^*_t\)</span> itself (productivity, capital, labor force). <strong>Permanent on output.</strong></li>
 </ul>
-</div>
 <div class="fragment">
 <p><strong>Unemployment (<span class="math inline">\(U_t\)</span>).</strong> Long-run unemployment is the natural rate <span class="math inline">\(U^*\)</span>, set by labor-market frictions, demographics, and institutions. Neither supply nor demand shocks change <span class="math inline">\(U^*\)</span>. <strong>Both shocks long-run neutral on unemployment.</strong></p>
 </div>
