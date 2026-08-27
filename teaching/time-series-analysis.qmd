@@ -1,14 +1,3 @@
 ---
 title: "Time Series Analysis (WISE)"
 ---
-
-## Lecture Slides
-
-1. [Introduction to Time Series](/files/teaching/time-series-analysis/unit1.html)
-2. [Linear Time Series Models](/files/teaching/time-series-analysis/unit2.html)
-3. [Estimation and Inference](/files/teaching/time-series-analysis/unit3.html)
-4. [Nonstationary Time Series Models](/files/teaching/time-series-analysis/unit4.html)
-5. [Regression with Time Series Data](/files/teaching/time-series-analysis/unit5.html)
-6. [Cointegration and Error Correction Models](/files/teaching/time-series-analysis/unit6.html)
-7. [Vector Autoregressions](/files/teaching/time-series-analysis/unit7.html) | [Johansen derivation (PDF)](/files/teaching/time-series-analysis/unit7_johansen_derivation.pdf)
-8. [Structural VARs and Identification](/files/teaching/time-series-analysis/unit8.html)
