@@ -4,6 +4,7 @@ project:
 
 website:
   title: "Natasha Kang"
+  site-url: "https://natkang.github.io"
   navbar:
     left:
       - text: "Research"
